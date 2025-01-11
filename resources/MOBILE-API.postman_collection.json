@@ -1,0 +1,543 @@
+{
+	"info": {
+		"_postman_id": "a6274143-21b2-4858-908c-ca26415df5cf",
+		"name": "MOBILE-API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30298700"
+	},
+	"item": [
+		{
+			"name": "Notes",
+			"item": [
+				{
+					"name": "GET: api/notes/",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/api/notes",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"notes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET: api/notes/ :id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/api/notes/1",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"notes",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post: api/notes",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\": \"ESTUDAR PARA A UC DE MOBILE\",\r\n    \"state\": \"TODO\",\r\n    \"priority\": \"NORMAL\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/api/notes",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"notes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT: api/notes",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\r\n    \"id\": \"fa27e745-7a34-43dd-b03e-da52c8ad7541\",\r\n    \"description\": \"ESTUDAR PARA A UC DE MOBILE!!!\",\r\n    \"state\": \"TODO\",\r\n    \"priority\": \"CRITICAL\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/api/notes/dd7d3b9a-5bad-4889-8bad-4035c532ea75",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"notes",
+								"dd7d3b9a-5bad-4889-8bad-4035c532ea75"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE: api/notes",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/api/notes",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"notes"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Travels",
+			"item": [
+				{
+					"name": "Travel Comments",
+					"item": [
+						{
+							"name": "POST: api/travels/comments",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"travelId\": \"858ff8c9-7089-4a61-a797-51b59478eb97\",\r\n    \"comment\": \"Muito bonito\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api_url}}/api/travels/comments",
+									"host": [
+										"{{api_url}}"
+									],
+									"path": [
+										"api",
+										"travels",
+										"comments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE: api/travels/comments/:id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{api_url}}/api/travels/comments/d490f979-f155-4979-b738-111e70f8f8d6",
+									"host": [
+										"{{api_url}}"
+									],
+									"path": [
+										"api",
+										"travels",
+										"comments",
+										"d490f979-f155-4979-b738-111e70f8f8d6"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Travel Location Comments",
+					"item": [
+						{
+							"name": "POST: api/travels/location/comments",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"locationId\": \"e89f997f-bb23-47c3-b788-f4754f0691a0\",\r\n    \"comment\": \"Vi as bolas de ouro!\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api_url}}/api/travels/locations/comments",
+									"host": [
+										"{{api_url}}"
+									],
+									"path": [
+										"api",
+										"travels",
+										"locations",
+										"comments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE: api/travels/location/comments/:id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{api_url}}/api/travels/locations/comments/ff6becee-d944-4371-94b3-135220eac32e",
+									"host": [
+										"{{api_url}}"
+									],
+									"path": [
+										"api",
+										"travels",
+										"locations",
+										"comments",
+										"ff6becee-d944-4371-94b3-135220eac32e"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Travel Locations",
+					"item": [
+						{
+							"name": "GET: api/travels/:id/locations",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_url}}/api/travels/cd03d45d-995a-467e-9dfa-30f2fd5a6a94/locations",
+									"host": [
+										"{{api_url}}"
+									],
+									"path": [
+										"api",
+										"travels",
+										"cd03d45d-995a-467e-9dfa-30f2fd5a6a94",
+										"locations"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "POST: api/travels/locations",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"travelId\": \"cd03d45d-995a-467e-9dfa-30f2fd5a6a94\",\r\n    \"description\": \"Museu CR7\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api_url}}/api/travels/locations",
+									"host": [
+										"{{api_url}}"
+									],
+									"path": [
+										"api",
+										"travels",
+										"locations"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PUT: api/travels/locations/:id",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"description\": \"Museu do grande CR7\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api_url}}/api/travels/locations/e89f997f-bb23-47c3-b788-f4754f0691a0",
+									"host": [
+										"{{api_url}}"
+									],
+									"path": [
+										"api",
+										"travels",
+										"locations",
+										"e89f997f-bb23-47c3-b788-f4754f0691a0"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE: api/travels/location/:id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{api_url}}/api/travels/locations/e89f997f-bb23-47c3-b788-f4754f0691a0",
+									"host": [
+										"{{api_url}}"
+									],
+									"path": [
+										"api",
+										"travels",
+										"locations",
+										"e89f997f-bb23-47c3-b788-f4754f0691a0"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET: api/travels/locations/:id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_url}}/api/travels/locations/e89f997f-bb23-47c3-b788-f4754f0691a0",
+									"host": [
+										"{{api_url}}"
+									],
+									"path": [
+										"api",
+										"travels",
+										"locations",
+										"e89f997f-bb23-47c3-b788-f4754f0691a0"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GET: api/travels",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/api/travels",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"travels"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET: api/travels/:id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/api/travels/a2e3e12e-c460-4ce3-9fdb-a63a03c7b4ea",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"travels",
+								"a2e3e12e-c460-4ce3-9fdb-a63a03c7b4ea"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE: api/travels/:id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/api/travels/a2e3e12e-c460-4ce3-9fdb-a63a03c7b4ea",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"travels",
+								"a2e3e12e-c460-4ce3-9fdb-a63a03c7b4ea"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST: api/travels",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\": \"Viagem à madeira\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/api/travels",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"travels"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT: api/travels/:id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\": \"Viagem à madeira com a familia\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/api/travels/a2e3e12e-c460-4ce3-9fdb-a63a03c7b4ea",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"travels",
+								"a2e3e12e-c460-4ce3-9fdb-a63a03c7b4ea"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "api_url",
+			"value": "https://mobile-api-one.vercel.app",
+			"type": "string"
+		},
+		{
+			"key": "api_url",
+			"value": "",
+			"type": "string",
+			"disabled": true
+		}
+	]
+}

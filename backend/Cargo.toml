@@ -1,0 +1,33 @@
+[package]
+name = "backend"
+version = "0.1.0"
+edition = "2021"
+authors = ["Lucas de Linhares <lucaslinhares@ipvc.pt>"]
+
+[dependencies]
+chrono = { version = "0.4.39", default-features = false }
+actix-web = "4"
+mimalloc = "0.1.43"
+serde = { version = "1", default-features = true }
+sonic-rs = "0.3.17"
+tokio = { version = "1", default-features = false, features = [
+    "rt-multi-thread",
+    "macros",
+] }
+tokio-postgres = { version = "0.7.12", features = ["with-chrono-0_4"] }
+argon2-kdf = { git = "https://github.com/lucascompython/argon2-kdf", branch = "main" }
+thiserror = "2.0.11"
+env_logger = { version = "0.11.6", optional = true }
+jsonwebtoken = { version = "9.3.0", default-features = false }
+futures-util = "0.3.31"
+
+[features]
+default = []
+log = ["env_logger"]
+
+
+[profile.release]
+codegen-units = 1 # Allows LLVM to perform better optimization.
+lto = true        # Enables link-time-optimizations.
+panic = "abort"   # Higher performance by disabling panic handlers.
+strip = true      # Ensures debug symbols are removed.

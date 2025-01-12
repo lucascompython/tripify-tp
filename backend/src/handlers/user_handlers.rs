@@ -47,8 +47,8 @@ pub async fn register(db: web::Data<Db>, data: web::Bytes) -> impl Responder {
 
 #[derive(Deserialize)]
 struct LoginRequest {
-    pub email: String,
-    pub password: String,
+    email: String,
+    password: String,
 }
 
 pub async fn login(db: web::Data<Db>, data: web::Bytes) -> impl Responder {

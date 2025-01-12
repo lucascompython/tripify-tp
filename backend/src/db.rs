@@ -6,6 +6,8 @@ pub struct DbStatements {
     pub insert_user: Statement,
     pub get_user_by_email: Statement,
     pub check_user_exists: Statement,
+    pub get_trip_from_user: Statement,
+    pub insert_trip: Statement,
 }
 
 pub struct Db {
@@ -27,11 +29,13 @@ impl Db {
             }
         });
 
-        let (_, insert_user, get_user_by_email, check_user_exists) = tokio::try_join!(
+        let (_, insert_user, get_user_by_email, check_user_exists, get_trip_from_user, insert_trip) = tokio::try_join!(
             client.batch_execute(DB_SCHEMA),
             client.prepare("INSERT INTO users (name, email, password) VALUES ($1, $2, $3)"),
             client.prepare("SELECT id, name, email, password FROM users WHERE email = $1"),
             client.prepare("SELECT id FROM users WHERE email = $1"),
+            client.prepare("SELECT * FROM trips WHERE owner_id = $1"),
+            client.prepare("INSERT INTO trips (owner_id, description, type, status, destination, departure, start_date, end_date) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)")
         )?;
 
         println!("Database schema applied and statements prepared!");
@@ -40,6 +44,8 @@ impl Db {
             insert_user,
             get_user_by_email,
             check_user_exists,
+            get_trip_from_user,
+            insert_trip,
         };
 
         Ok(Self { client, statements })

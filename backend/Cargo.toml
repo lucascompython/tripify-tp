@@ -5,7 +5,7 @@ edition = "2021"
 authors = ["Lucas de Linhares <lucaslinhares@ipvc.pt>"]
 
 [dependencies]
-chrono = { version = "0.4.39", default-features = false }
+chrono = { version = "0.4.39", default-features = false, features = ["serde"] }
 actix-web = "4"
 mimalloc = "0.1.43"
 serde = { version = "1", default-features = true }

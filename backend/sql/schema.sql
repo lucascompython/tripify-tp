@@ -16,7 +16,8 @@ CREATE TABLE IF NOT EXISTS trips (
     -- E.g., "Leisure", "Business"
     status VARCHAR(50),
     -- E.g., "Planned", "Completed", "Canceled"
-    location VARCHAR(255),
+    destination VARCHAR(255),
+    departure VARCHAR(255),
     -- E.g., city or country
     start_date DATE,
     end_date DATE,

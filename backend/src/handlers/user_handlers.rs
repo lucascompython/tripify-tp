@@ -78,3 +78,9 @@ pub async fn login(db: web::Data<Db>, data: web::Bytes) -> impl Responder {
         false => HttpResponse::Unauthorized().finish(),
     }
 }
+
+// TODO: Remove this later
+
+pub async fn check() -> impl Responder {
+    HttpResponse::Ok().finish()
+}

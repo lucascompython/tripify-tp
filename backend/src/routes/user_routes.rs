@@ -1,7 +1,5 @@
 use actix_web::web;
 
-// TODO: See middleware for other future routes
-
 pub fn init(cfg: &mut web::ServiceConfig) {
     cfg.service(
         web::scope("/users")
@@ -11,7 +9,15 @@ pub fn init(cfg: &mut web::ServiceConfig) {
             )
             .route(
                 "/login",
-                web::get().to(crate::handlers::user_handlers::login),
+                web::post().to(crate::handlers::user_handlers::login),
+            )
+            .service(
+                web::scope("")
+                    .wrap(crate::middleware::auth_middleware::AuthMiddleware)
+                    .route(
+                        "/check",
+                        web::get().to(crate::handlers::user_handlers::check),
+                    ),
             ),
     );
 }

@@ -20,6 +20,7 @@ thiserror = "2.0.11"
 env_logger = { version = "0.11.6", optional = true }
 jsonwebtoken = { version = "9.3.0", default-features = false }
 futures-util = "0.3.31"
+actix-cors = "0.7.0"
 
 [features]
 default = []

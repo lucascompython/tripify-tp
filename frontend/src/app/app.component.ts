@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 
 const API_URL = 'http://localhost:1234';
@@ -9,7 +10,7 @@ const API_URL = 'http://localhost:1234';
   imports: [IonApp, IonRouterOutlet],
 })
 export class AppComponent implements OnInit {
-  constructor() {}
+  constructor(private router: Router) {}
   ngOnInit() {
     this.checkUser();
   }
@@ -26,7 +27,7 @@ export class AppComponent implements OnInit {
           window.location.pathname !== '/login' &&
           window.location.pathname !== '/register'
         ) {
-          window.location.href = '/login';
+          this.router.navigate(['/login']);
         }
       }
 
@@ -34,14 +35,14 @@ export class AppComponent implements OnInit {
         window.location.pathname === '/login' ||
         window.location.pathname === '/register'
       ) {
-        window.location.href = '/';
+        this.router.navigate(['/']);
       }
     } catch (e) {
       if (
         window.location.pathname !== '/register' &&
         window.location.pathname !== '/login'
       ) {
-        window.location.href = '/login';
+        this.router.navigate(['/login']);
       }
     }
   }

@@ -1,4 +1,4 @@
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import {
   ModalController,
@@ -11,7 +11,7 @@ import {
   IonLabel,
   IonButtons,
 } from '@ionic/angular/standalone';
-import { Trip } from '../utils/api_utils';
+import { API_URL, authFetch, Trip, User } from '../utils/api_utils';
 
 @Component({
   selector: 'app-trip-details-modal',
@@ -27,6 +27,7 @@ import { Trip } from '../utils/api_utils';
     IonLabel,
     IonButtons,
     DatePipe,
+    CommonModule,
   ],
   providers: [DatePipe],
   standalone: true,
@@ -34,13 +35,26 @@ import { Trip } from '../utils/api_utils';
 export class TripDetailsModalComponent implements OnInit {
   @Input()
   trip!: Trip;
+  owner: User | null = null;
 
   constructor(
     private modalController: ModalController,
     private datePipe: DatePipe
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.trip.shared) {
+      this.getOwner();
+    }
+  }
+
+  async getOwner() {
+    const owner_id = this.trip.owner_id;
+    const resp = await authFetch(`${API_URL}/users/${owner_id}`);
+
+    const user: User = await resp.json();
+    this.owner = user;
+  }
 
   closeModal() {
     this.modalController.dismiss();

@@ -21,6 +21,10 @@ pub fn init(cfg: &mut web::ServiceConfig) {
                     .route(
                         "/get_all",
                         web::get().to(crate::handlers::user_handlers::get_all),
+                    )
+                    .route(
+                        "/{user_id}",
+                        web::get().to(crate::handlers::user_handlers::get_user),
                     ),
             ),
     );

@@ -36,4 +36,8 @@
     <ion-label>End Date</ion-label>
     <div>{{ trip.end_date | date : "longDate" }}</div>
   </ion-item>
+  <ion-item *ngIf="owner">
+    <ion-label>Owner</ion-label>
+    <div>{{ owner?.name }} ({{ owner?.email }})</div>
+  </ion-item>
 </ion-content>

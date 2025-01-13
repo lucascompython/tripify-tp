@@ -46,6 +46,7 @@ export interface Trip {
   departure: string;
   start_date: Date;
   end_date: Date;
+  shared: boolean;
 }
 
 /**
@@ -62,7 +63,14 @@ export async function getTrips(): Promise<Trip[]> {
     data[i].end_date = new Date(data[i].end_date);
     data[i].type = TripType[data[i].type as keyof typeof TripType];
     data[i].status = TripStatus[data[i].status as keyof typeof TripStatus];
+    data[i].shared = data[i].owner_id !== parseInt(user_id!);
   }
 
   return data;
+}
+
+export interface User {
+  id: number;
+  name: string;
+  email: string;
 }

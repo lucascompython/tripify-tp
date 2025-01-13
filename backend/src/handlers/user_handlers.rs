@@ -110,3 +110,21 @@ pub async fn get_all(db: web::Data<Db>) -> impl Responder {
         Err(_) => HttpResponse::InternalServerError().finish(),
     }
 }
+
+pub async fn get_user(db: web::Data<Db>, user_id: web::Path<i32>) -> impl Responder {
+    match db
+        .client
+        .query_one(&db.statements.get_user_by_id, &[&user_id.into_inner()])
+        .await
+    {
+        Ok(row) => {
+            let user = GetUserResponse {
+                id: row.get(0),
+                name: row.get(1),
+                email: row.get(2),
+            };
+            json_response(&user)
+        }
+        Err(_) => HttpResponse::NotFound().finish(),
+    }
+}

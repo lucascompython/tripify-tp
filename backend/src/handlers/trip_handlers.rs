@@ -108,3 +108,22 @@ pub async fn delete_trip(db: web::Data<Db>, trip_id: web::Path<i32>) -> impl Res
         .unwrap();
     HttpResponse::Ok().finish()
 }
+
+#[derive(Deserialize)]
+struct ShareTripRequest {
+    trip_id: i32,
+    user_id: i32,
+}
+pub async fn share_trip(db: web::Data<Db>, data: web::Bytes) -> impl Responder {
+    let Json(share): Json<ShareTripRequest> = Json::from_bytes(data).unwrap();
+
+    db.client
+        .execute(
+            &db.statements.insert_trip_share,
+            &[&share.trip_id, &share.user_id],
+        )
+        .await
+        .unwrap();
+
+    HttpResponse::Ok().finish()
+}

@@ -1,10 +1,10 @@
 use crate::models::user::User;
 use crate::utils::hashing_utils::verify;
-use crate::utils::json_utils::Json;
+use crate::utils::json_utils::{json_response, Json};
 use crate::utils::jwt_utils::create_token;
 use crate::{db::Db, utils::hashing_utils::hash};
 use actix_web::{http, web, HttpResponse, Responder};
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
 #[derive(Deserialize)]
 struct RegisterRequest {
@@ -85,4 +85,28 @@ pub async fn login(db: web::Data<Db>, data: web::Bytes) -> impl Responder {
 
 pub async fn check() -> impl Responder {
     HttpResponse::Ok().finish()
+}
+
+#[derive(Serialize)]
+struct GetUserResponse {
+    id: i32,
+    name: String,
+    email: String,
+}
+
+pub async fn get_all(db: web::Data<Db>) -> impl Responder {
+    match db.client.query(&db.statements.get_all_users, &[]).await {
+        Ok(rows) => {
+            let users: Vec<GetUserResponse> = rows
+                .iter()
+                .map(|row| GetUserResponse {
+                    id: row.get(0),
+                    name: row.get(1),
+                    email: row.get(2),
+                })
+                .collect();
+            json_response(&users)
+        }
+        Err(_) => HttpResponse::InternalServerError().finish(),
+    }
 }

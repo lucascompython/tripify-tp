@@ -1,6 +1,25 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <img src="assets/logo.png" alt="logo" />
+    <ion-buttons slot="end">
+      <ion-button id="settings-button">
+        <ion-icon slot="icon-only" name="settings-outline"></ion-icon>
+      </ion-button>
+      <ion-popover trigger="settings-button" trigger-action="click">
+        <ng-template>
+          <ion-content>
+            <ion-list>
+              <ion-item button (click)="goToProfile()">
+                <ion-label>Profile</ion-label>
+              </ion-item>
+              <ion-item button (click)="signOut()">
+                <ion-label>Sign Out</ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-content>
+        </ng-template>
+      </ion-popover>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 

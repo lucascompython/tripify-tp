@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import {
   IonHeader,
   IonToolbar,
-  IonTitle,
   IonContent,
   IonList,
   AlertController,
@@ -12,12 +11,16 @@ import {
   IonButton,
   IonIcon,
   ModalController,
+  IonButtons,
+  IonPopover,
+  PopoverController,
 } from '@ionic/angular/standalone';
-import { createOutline, trashOutline } from 'ionicons/icons';
+import { createOutline, settingsOutline, trashOutline } from 'ionicons/icons';
 import { authFetch, API_URL, getTrips, Trip } from '../utils/api_utils';
 import { EditTripModalComponent } from '../edit-trip-modal/edit-trip-modal.component';
 import { TripDetailsModalComponent } from '../trip-details-modal/trip-details-modal.component';
 import { addIcons } from 'ionicons';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -32,17 +35,22 @@ import { addIcons } from 'ionicons';
     IonLabel,
     IonButton,
     IonIcon,
+    IonButtons,
+    IonPopover,
   ],
 })
 export class Tab1Page implements OnInit {
   trips: Trip[] = [];
   constructor(
     private alertController: AlertController,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private popoverController: PopoverController,
+    private router: Router
   ) {
     addIcons({
       'create-outline': createOutline,
       'trash-outline': trashOutline,
+      'settings-outline': settingsOutline,
     });
   }
 
@@ -50,6 +58,17 @@ export class Tab1Page implements OnInit {
     getTrips().then((trips) => {
       this.trips = trips;
     });
+  }
+
+  async goToProfile() {
+    await this.popoverController.dismiss();
+    this.router.navigate(['/profile']);
+  }
+
+  async signOut() {
+    await this.popoverController.dismiss();
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
   }
 
   async showTripDetails(trip: Trip) {

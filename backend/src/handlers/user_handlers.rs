@@ -51,6 +51,12 @@ struct LoginRequest {
     password: String,
 }
 
+#[derive(Serialize)]
+struct LoginReponse {
+    id: i32,
+    name: String,
+}
+
 pub async fn login(db: web::Data<Db>, data: web::Bytes) -> impl Responder {
     let Json(user_request): Json<LoginRequest> = Json::from_bytes(data).unwrap();
 
@@ -76,7 +82,7 @@ pub async fn login(db: web::Data<Db>, data: web::Bytes) -> impl Responder {
     match verify(&user_request.password, &user.password) {
         true => HttpResponse::Ok()
             .insert_header((http::header::AUTHORIZATION, create_token(&user.email)))
-            .body(user.id.to_string()),
+            .body(format!("{},{}", user.id, user.name)),
         false => HttpResponse::Unauthorized().finish(),
     }
 }

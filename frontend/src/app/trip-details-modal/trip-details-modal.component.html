@@ -40,6 +40,34 @@
     <ion-label>Owner</ion-label>
     <div>{{ owner.name }} ({{ owner.email }})</div>
   </ion-item>
+
+  <!-- Section for displaying comments -->
+  <div class="comments-section">
+    <ion-list>
+      <ion-list-header>
+        <ion-label>Comments</ion-label>
+      </ion-list-header>
+      <ion-item *ngFor="let comment of comments">
+        <ion-label>{{ comment.user_name }}: {{ comment.comment }}</ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <!-- Section for writing a comment -->
+  <form
+    [formGroup]="commentForm"
+    (ngSubmit)="addComment()"
+    class="comment-form"
+  >
+    <ion-item>
+      <ion-label position="stacked">Write a Comment</ion-label>
+      <ion-textarea
+        formControlName="comment"
+        placeholder="Enter your comment here"
+      ></ion-textarea>
+    </ion-item>
+    <ion-button expand="full" type="submit">Add Comment</ion-button>
+  </form>
 </ion-content>
 
 <ion-footer>

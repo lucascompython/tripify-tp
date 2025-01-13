@@ -1,0 +1,19 @@
+ion-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.trip-details {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.comments-section {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.comment-form {
+  margin-top: auto;
+}

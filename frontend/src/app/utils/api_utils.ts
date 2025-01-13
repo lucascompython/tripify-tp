@@ -74,3 +74,11 @@ export interface User {
   name: string;
   email: string;
 }
+
+export interface Comment {
+  id: number;
+  trip_id: number;
+  user_id: number;
+  user_name: string;
+  comment: string;
+}

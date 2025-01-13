@@ -71,10 +71,13 @@ export class LoginPage {
         });
 
         if (response.ok) {
-          const user_id = await response.text();
+          const data = await response.text();
+          const [id, name] = data.split(',');
           const token = response.headers.get('Authorization')!;
-          localStorage.setItem('user_id', user_id);
+          localStorage.setItem('user_id', id);
+          localStorage.setItem('name', name);
           localStorage.setItem('token', token);
+
           window.location.pathname = '/';
         } else {
           this.showLoginErrorAlert();

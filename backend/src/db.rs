@@ -49,8 +49,8 @@ impl Db {
                 client.prepare("UPDATE trips SET owner_id = $1, description = $2, type = $3, status = $4, destination = $5, departure = $6, start_date = $7, end_date = $8 WHERE id = $9"),
                 client.prepare("DELETE FROM trips WHERE id = $1"),
                 client.prepare("DELETE FROM trip_shares WHERE trip_id = $1 AND user_id = $2"),
-                client.prepare("INSERT INTO trip_comments (trip_id, user_id, comment) VALUES ($1, $2, $3)"),
-                client.prepare("SELECT tc.trip_id, tc.user_id, tc.comment FROM trip_comments tc WHERE tc.trip_id = $1"),
+                client.prepare("INSERT INTO trip_comments (trip_id, user_id, comment) VALUES ($1, $2, $3) RETURNING id"),
+                client.prepare("SELECT tc.id, tc.trip_id, tc.user_id, u.name AS user_name, tc.comment FROM trip_comments tc JOIN users u ON tc.user_id = u.id WHERE tc.trip_id = $1"),
             )?;
 
         println!("Database schema applied and statements prepared!");

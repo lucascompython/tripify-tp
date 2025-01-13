@@ -189,24 +189,36 @@ pub async fn get_valid_share_users(
 }
 
 #[derive(Deserialize, Serialize)]
-struct CommentRequest {
+struct AddCommentRequest {
     trip_id: i32,
     user_id: i32,
     comment: String,
 }
 
 pub async fn add_comment(db: web::Data<Db>, data: web::Bytes) -> impl Responder {
-    let Json(comment): Json<CommentRequest> = Json::from_bytes(data).unwrap();
+    let Json(comment): Json<AddCommentRequest> = Json::from_bytes(data).unwrap();
 
-    db.client
-        .execute(
+    let row = db
+        .client
+        .query_one(
             &db.statements.insert_comment,
             &[&comment.trip_id, &comment.user_id, &comment.comment],
         )
         .await
         .unwrap();
 
-    HttpResponse::Ok().finish()
+    let comment_id: i32 = row.get(0);
+
+    HttpResponse::Ok().body(comment_id.to_string())
+}
+
+#[derive(Deserialize, Serialize)]
+struct GetCommentResponse {
+    id: i32,
+    trip_id: i32,
+    user_id: i32,
+    user_name: String,
+    comment: String,
 }
 
 pub async fn get_comments(db: web::Data<Db>, trip_id: web::Path<i32>) -> impl Responder {
@@ -218,12 +230,14 @@ pub async fn get_comments(db: web::Data<Db>, trip_id: web::Path<i32>) -> impl Re
         .await
     {
         Ok(rows) => {
-            let comments: Vec<CommentRequest> = rows
+            let comments: Vec<GetCommentResponse> = rows
                 .iter()
-                .map(|row| CommentRequest {
-                    trip_id: row.get(0),
-                    user_id: row.get(1),
-                    comment: row.get(2),
+                .map(|row| GetCommentResponse {
+                    id: row.get(0),
+                    trip_id: row.get(1),
+                    user_id: row.get(2),
+                    user_name: row.get(3),
+                    comment: row.get(4),
                 })
                 .collect();
             json_response(&comments)

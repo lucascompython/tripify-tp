@@ -5,6 +5,7 @@ pub struct Trip {
     pub id: i32,
     pub owner_id: i32,
     pub description: String,
+    #[serde(rename = "type")]
     pub type_: String,
     pub status: String,
     pub destination: String,

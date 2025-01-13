@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
-
-const API_URL = 'http://localhost:1234';
+import { authFetch, API_URL } from './utils/api_utils';
 
 @Component({
   selector: 'app-root',
@@ -17,11 +16,7 @@ export class AppComponent implements OnInit {
 
   async checkUser() {
     try {
-      const resp = await fetch(`${API_URL}/users/check`, {
-        headers: {
-          Authorization: localStorage.getItem('token') ?? '',
-        },
-      });
+      const resp = await authFetch(`${API_URL}/users/check`);
       if (!resp.ok) {
         if (
           window.location.pathname !== '/login' &&

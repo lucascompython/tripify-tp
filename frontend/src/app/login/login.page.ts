@@ -21,8 +21,7 @@ import {
   IonCardContent,
   AlertController,
 } from '@ionic/angular/standalone';
-
-const API_URL = 'http://localhost:1234';
+import { API_URL } from '../utils/api_utils';
 
 @Component({
   selector: 'app-login',
@@ -72,7 +71,9 @@ export class LoginPage {
         });
 
         if (response.ok) {
-          const token = await response.text();
+          const user_id = await response.text();
+          const token = response.headers.get('Authorization')!;
+          localStorage.setItem('user_id', user_id);
           localStorage.setItem('token', token);
           this.router.navigate(['/']);
         } else {

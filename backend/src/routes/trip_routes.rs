@@ -11,6 +11,14 @@ pub fn init(cfg: &mut web::ServiceConfig) {
             .route(
                 "/add",
                 web::post().to(crate::handlers::trip_handlers::add_trip),
+            )
+            .route(
+                "/{trip_id}",
+                web::put().to(crate::handlers::trip_handlers::update_trip),
+            )
+            .route(
+                "/{trip_id}",
+                web::delete().to(crate::handlers::trip_handlers::delete_trip),
             ),
     );
 }

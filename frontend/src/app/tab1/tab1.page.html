@@ -4,12 +4,19 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let trip of trips">
+      <ion-label>
+        <h2>{{ trip.description }}</h2>
+        <p>{{ trip.destination }} - {{ trip.departure }}</p>
+      </ion-label>
+      <ion-button fill="clear" (click)="editTrip(trip)">
+        <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" color="danger" (click)="removeTrip(trip.id)">
+        <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
 </ion-content>

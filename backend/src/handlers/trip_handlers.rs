@@ -71,3 +71,40 @@ pub async fn add_trip(db: web::Data<Db>, data: web::Bytes) -> impl Responder {
 
     HttpResponse::Ok().finish()
 }
+
+pub async fn update_trip(
+    db: web::Data<Db>,
+    data: web::Bytes,
+    trip_id: web::Path<i32>,
+) -> impl Responder {
+    let Json(trip): Json<AddTripRequest> = Json::from_bytes(data).unwrap();
+
+    db.client
+        .execute(
+            &db.statements.update_trip,
+            &[
+                &trip.owner_id,
+                &trip.description,
+                &trip.type_,
+                &trip.status,
+                &trip.destination,
+                &trip.departure,
+                &trip.start_date,
+                &trip.end_date,
+                &trip_id.into_inner(),
+            ],
+        )
+        .await
+        .unwrap();
+
+    HttpResponse::Ok().finish()
+}
+
+pub async fn delete_trip(db: web::Data<Db>, trip_id: web::Path<i32>) -> impl Responder {
+    let trip_id = trip_id.into_inner();
+    db.client
+        .execute(&db.statements.delete_trip, &[&trip_id])
+        .await
+        .unwrap();
+    HttpResponse::Ok().finish()
+}

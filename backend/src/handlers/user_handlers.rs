@@ -3,7 +3,7 @@ use crate::utils::hashing_utils::verify;
 use crate::utils::json_utils::Json;
 use crate::utils::jwt_utils::create_token;
 use crate::{db::Db, utils::hashing_utils::hash};
-use actix_web::{web, HttpResponse, Responder};
+use actix_web::{http, web, HttpResponse, Responder};
 use serde::Deserialize;
 
 #[derive(Deserialize)]
@@ -74,7 +74,9 @@ pub async fn login(db: web::Data<Db>, data: web::Bytes) -> impl Responder {
     };
 
     match verify(&user_request.password, &user.password) {
-        true => HttpResponse::Ok().body(create_token(&user.email)),
+        true => HttpResponse::Ok()
+            .insert_header((http::header::AUTHORIZATION, create_token(&user.email)))
+            .body(user.id.to_string()),
         false => HttpResponse::Unauthorized().finish(),
     }
 }

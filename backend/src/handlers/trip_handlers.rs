@@ -1,5 +1,5 @@
 use actix_web::{web, HttpResponse, Responder};
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
 use crate::{
     db::Db,
@@ -112,18 +112,78 @@ pub async fn delete_trip(db: web::Data<Db>, trip_id: web::Path<i32>) -> impl Res
 #[derive(Deserialize)]
 struct ShareTripRequest {
     trip_id: i32,
-    user_id: i32,
+    user_ids: Vec<i32>,
 }
 pub async fn share_trip(db: web::Data<Db>, data: web::Bytes) -> impl Responder {
     let Json(share): Json<ShareTripRequest> = Json::from_bytes(data).unwrap();
 
+    let mut query = String::from("INSERT INTO trip_shares (trip_id, user_id) VALUES ");
+    let mut params: Vec<&(dyn tokio_postgres::types::ToSql + Sync)> = Vec::new();
+
+    for (i, user_id) in share.user_ids.iter().enumerate() {
+        if i > 0 {
+            query.push_str(", ");
+        }
+        query.push_str(&format!("($1, ${})", i + 2));
+        params.push(user_id);
+    }
+
+    params.insert(0, &share.trip_id);
+
+    db.client.execute(&query, &params).await.unwrap();
+
+    HttpResponse::Ok().finish()
+}
+
+#[derive(Deserialize)]
+struct DeleteSharedTripRequest {
+    trip_id: i32,
+    user_id: i32,
+}
+
+pub async fn delete_shared_trip(db: web::Data<Db>, data: web::Bytes) -> impl Responder {
+    let Json(share): Json<DeleteSharedTripRequest> = Json::from_bytes(data).unwrap();
+
     db.client
         .execute(
-            &db.statements.insert_trip_share,
+            &db.statements.delete_shared_trip,
             &[&share.trip_id, &share.user_id],
         )
         .await
         .unwrap();
 
     HttpResponse::Ok().finish()
+}
+
+#[derive(Serialize)]
+struct GetUserResponse {
+    id: i32,
+    name: String,
+    email: String,
+}
+
+pub async fn get_valid_share_users(
+    db: web::Data<Db>,
+    req: web::Path<(i32, i32)>,
+) -> impl Responder {
+    let req = req.into_inner();
+
+    match db
+        .client
+        .query(&db.statements.get_all_valid_share_users, &[&req.1, &req.0])
+        .await
+    {
+        Ok(rows) => {
+            let users: Vec<GetUserResponse> = rows
+                .iter()
+                .map(|row| GetUserResponse {
+                    id: row.get(0),
+                    name: row.get(1),
+                    email: row.get(2),
+                })
+                .collect();
+            json_response(&users)
+        }
+        Err(_) => HttpResponse::InternalServerError().finish(),
+    }
 }

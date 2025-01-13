@@ -39,7 +39,7 @@ import { Router } from '@angular/router';
     IonPopover,
   ],
 })
-export class Tab1Page implements OnInit {
+export class Tab1Page {
   trips: Trip[] = [];
   constructor(
     private alertController: AlertController,
@@ -54,7 +54,7 @@ export class Tab1Page implements OnInit {
     });
   }
 
-  ngOnInit() {
+  ionViewWillEnter() {
     getTrips().then((trips) => {
       this.trips = trips;
     });
@@ -101,7 +101,7 @@ export class Tab1Page implements OnInit {
     await modal.present();
   }
 
-  async removeTrip(event: Event, tripId: number) {
+  async removeTrip(event: Event, trip: Trip) {
     event.stopPropagation();
 
     const alert = await this.alertController.create({
@@ -116,9 +116,20 @@ export class Tab1Page implements OnInit {
         {
           text: 'Delete',
           handler: async () => {
-            await authFetch(`${API_URL}/trips/${tripId}`, {
-              method: 'DELETE',
-            });
+            if (trip.shared) {
+              await authFetch(`${API_URL}/trips/delete_shared`, {
+                method: 'DELETE',
+                body: JSON.stringify({
+                  trip_id: trip.id,
+                  user_id: parseInt(localStorage.getItem('user_id')!),
+                }),
+              });
+            } else {
+              await authFetch(`${API_URL}/trips/${trip.id}`, {
+                method: 'DELETE',
+              });
+            }
+            const tripId = trip.id;
             this.trips = this.trips.filter((trip) => trip.id !== tripId);
           },
         },

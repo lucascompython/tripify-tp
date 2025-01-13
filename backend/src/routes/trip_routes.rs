@@ -17,12 +17,20 @@ pub fn init(cfg: &mut web::ServiceConfig) {
                 web::put().to(crate::handlers::trip_handlers::update_trip),
             )
             .route(
+                "/delete_shared",
+                web::delete().to(crate::handlers::trip_handlers::delete_shared_trip),
+            )
+            .route(
                 "/{trip_id}",
                 web::delete().to(crate::handlers::trip_handlers::delete_trip),
             )
             .route(
                 "/share",
                 web::post().to(crate::handlers::trip_handlers::share_trip),
+            )
+            .route(
+                "/{trip_id}/{owner_id}/valid_users",
+                web::get().to(crate::handlers::trip_handlers::get_valid_share_users),
             ),
     );
 }

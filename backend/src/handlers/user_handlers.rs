@@ -94,23 +94,6 @@ struct GetUserResponse {
     email: String,
 }
 
-pub async fn get_all(db: web::Data<Db>) -> impl Responder {
-    match db.client.query(&db.statements.get_all_users, &[]).await {
-        Ok(rows) => {
-            let users: Vec<GetUserResponse> = rows
-                .iter()
-                .map(|row| GetUserResponse {
-                    id: row.get(0),
-                    name: row.get(1),
-                    email: row.get(2),
-                })
-                .collect();
-            json_response(&users)
-        }
-        Err(_) => HttpResponse::InternalServerError().finish(),
-    }
-}
-
 pub async fn get_user(db: web::Data<Db>, user_id: web::Path<i32>) -> impl Responder {
     match db
         .client

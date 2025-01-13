@@ -77,7 +77,7 @@ export class RegisterPage {
           localStorage.setItem('user_id', user_id);
           localStorage.setItem('token', token);
 
-          this.router.navigate(['/']);
+          window.location.pathname = '/';
         } else if (response.status === 409) {
           this.showAccountExistsAlert();
         } else {

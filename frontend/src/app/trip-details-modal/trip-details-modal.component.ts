@@ -10,8 +10,10 @@ import {
   IonItem,
   IonLabel,
   IonButtons,
+  IonFooter,
 } from '@ionic/angular/standalone';
 import { API_URL, authFetch, Trip, User } from '../utils/api_utils';
+import { ShareTripModalComponent } from '../share-trip-modal/share-trip-modal.component';
 
 @Component({
   selector: 'app-trip-details-modal',
@@ -28,6 +30,7 @@ import { API_URL, authFetch, Trip, User } from '../utils/api_utils';
     IonButtons,
     DatePipe,
     CommonModule,
+    IonFooter,
   ],
   providers: [DatePipe],
   standalone: true,
@@ -46,6 +49,17 @@ export class TripDetailsModalComponent implements OnInit {
     if (this.trip.shared) {
       this.getOwner();
     }
+  }
+
+  async addComment() {
+    console.log('addComment');
+  }
+  async shareTrip() {
+    const modal = await this.modalController.create({
+      component: ShareTripModalComponent,
+      componentProps: { tripId: this.trip.id, ownerId: this.trip.owner_id },
+    });
+    await modal.present();
   }
 
   async getOwner() {

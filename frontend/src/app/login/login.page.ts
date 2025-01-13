@@ -75,7 +75,7 @@ export class LoginPage {
           const token = response.headers.get('Authorization')!;
           localStorage.setItem('user_id', user_id);
           localStorage.setItem('token', token);
-          this.router.navigate(['/']);
+          window.location.pathname = '/';
         } else {
           this.showLoginErrorAlert();
         }

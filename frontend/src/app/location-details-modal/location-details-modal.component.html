@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Location Details</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label>Name</ion-label>
+    <div>{{ location.location }}</div>
+  </ion-item>
+  <ion-item>
+    <ion-label>Description</ion-label>
+    <div>{{ location.description }}</div>
+  </ion-item>
+  <ion-item>
+    <ion-label>Type</ion-label>
+    <div>{{ location.type }}</div>
+  </ion-item>
+  <ion-item>
+    <ion-label>Status</ion-label>
+    <div>{{ location.status }}</div>
+  </ion-item>
+  <ion-item>
+    <ion-label>Trip</ion-label>
+    <div>{{ location.trip_description }}</div>
+  </ion-item>
+  <ion-item>
+    <ion-label>Date</ion-label>
+    <div>
+      {{ location.start_date | date : "longDate" }} -
+      {{ location.end_date | date : "longDate" }}
+    </div>
+  </ion-item>
+
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Comments</ion-label>
+    </ion-list-header>
+    <ion-item *ngFor="let comment of comments">
+      <ion-label>{{ comment.user_name }}: {{ comment.comment }}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -78,7 +78,7 @@ impl Db {
             client.prepare("DELETE FROM trip_shares WHERE trip_id = $1 AND user_id = $2"),
             client.prepare("INSERT INTO trip_comments (trip_id, user_id, comment) VALUES ($1, $2, $3) RETURNING id"),
             client.prepare("SELECT tc.id, tc.trip_id, tc.user_id, u.name AS user_name, tc.comment FROM trip_comments tc JOIN users u ON tc.user_id = u.id WHERE tc.trip_id = $1"),
-            client.prepare("SELECT id, trip_id, description, type, status, location, start_date, end_date FROM locations"),
+            client.prepare("SELECT l.id, l.trip_id, t.description AS trip_description, l.description, l.type, l.status, l.location, l.start_date, l.end_date FROM locations l JOIN trips t ON l.trip_id = t.id"),
             client.prepare("INSERT INTO locations (trip_id, description, type, status, location, start_date, end_date) VALUES ($1, $2, $3, $4, $5, $6, $7)"),
             client.prepare("DELETE FROM locations WHERE id = $1"),
             client.prepare("UPDATE locations SET description = $1, type = $2, status = $3, location = $4, start_date = $5, end_date = $6 WHERE id = $7"),

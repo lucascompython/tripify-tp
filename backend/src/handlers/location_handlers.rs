@@ -8,20 +8,35 @@ use crate::{
     utils::json_utils::{json_response, Json},
 };
 
+#[derive(Serialize)]
+struct GetLocationResponse {
+    id: i32,
+    trip_id: i32,
+    trip_description: String,
+    description: String,
+    #[serde(rename = "type")]
+    type_: String,
+    status: String,
+    location: String,
+    start_date: chrono::NaiveDate,
+    end_date: chrono::NaiveDate,
+}
+
 pub async fn get_locations(db: web::Data<Db>) -> impl Responder {
     match db.client.query(&db.statements.get_locations, &[]).await {
         Ok(rows) => {
-            let locations: Vec<Location> = rows
+            let locations: Vec<GetLocationResponse> = rows
                 .iter()
-                .map(|row| Location {
+                .map(|row| GetLocationResponse {
                     id: row.get(0),
                     trip_id: row.get(1),
-                    description: row.get(2),
-                    type_: row.get(3),
-                    status: row.get(4),
-                    location: row.get(5),
-                    start_date: row.get(6),
-                    end_date: row.get(7),
+                    trip_description: row.get(2),
+                    description: row.get(3),
+                    type_: row.get(4),
+                    status: row.get(5),
+                    location: row.get(6),
+                    start_date: row.get(7),
+                    end_date: row.get(8),
                 })
                 .collect();
             json_response(&locations)

@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-  IonHeader,
-  IonToolbar,
   IonContent,
   IonList,
   AlertController,
@@ -11,8 +9,6 @@ import {
   IonButton,
   IonIcon,
   ModalController,
-  IonButtons,
-  IonPopover,
   PopoverController,
 } from '@ionic/angular/standalone';
 import { createOutline, settingsOutline, trashOutline } from 'ionicons/icons';

@@ -187,3 +187,47 @@ pub async fn get_valid_share_users(
         Err(_) => HttpResponse::InternalServerError().finish(),
     }
 }
+
+#[derive(Deserialize, Serialize)]
+struct CommentRequest {
+    trip_id: i32,
+    user_id: i32,
+    comment: String,
+}
+
+pub async fn add_comment(db: web::Data<Db>, data: web::Bytes) -> impl Responder {
+    let Json(comment): Json<CommentRequest> = Json::from_bytes(data).unwrap();
+
+    db.client
+        .execute(
+            &db.statements.insert_comment,
+            &[&comment.trip_id, &comment.user_id, &comment.comment],
+        )
+        .await
+        .unwrap();
+
+    HttpResponse::Ok().finish()
+}
+
+pub async fn get_comments(db: web::Data<Db>, trip_id: web::Path<i32>) -> impl Responder {
+    let trip_id = trip_id.into_inner();
+
+    match db
+        .client
+        .query(&db.statements.get_comments_from_trip, &[&trip_id])
+        .await
+    {
+        Ok(rows) => {
+            let comments: Vec<CommentRequest> = rows
+                .iter()
+                .map(|row| CommentRequest {
+                    trip_id: row.get(0),
+                    user_id: row.get(1),
+                    comment: row.get(2),
+                })
+                .collect();
+            json_response(&comments)
+        }
+        Err(_) => HttpResponse::InternalServerError().finish(),
+    }
+}

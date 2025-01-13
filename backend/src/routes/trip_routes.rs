@@ -31,6 +31,14 @@ pub fn init(cfg: &mut web::ServiceConfig) {
             .route(
                 "/{trip_id}/{owner_id}/valid_users",
                 web::get().to(crate::handlers::trip_handlers::get_valid_share_users),
+            )
+            .route(
+                "/comment",
+                web::post().to(crate::handlers::trip_handlers::add_comment),
+            )
+            .route(
+                "/{trip_id}/comments",
+                web::get().to(crate::handlers::trip_handlers::get_comments),
             ),
     );
 }

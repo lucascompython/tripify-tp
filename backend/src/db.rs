@@ -13,6 +13,8 @@ pub struct DbStatements {
     pub update_trip: Statement,
     pub delete_trip: Statement,
     pub delete_shared_trip: Statement,
+    pub insert_comment: Statement,
+    pub get_comments_from_trip: Statement,
 }
 
 pub struct Db {
@@ -34,7 +36,7 @@ impl Db {
             }
         });
 
-        let (_, insert_user, get_user_by_email, check_user_exists,  get_all_valid_share_users, get_user_by_id, get_trip_from_user, insert_trip, update_trip, delete_trip, delete_shared_trip) =
+        let (_, insert_user, get_user_by_email, check_user_exists,  get_all_valid_share_users, get_user_by_id, get_trip_from_user, insert_trip, update_trip, delete_trip, delete_shared_trip, insert_comment, get_comments_from_trip) =
             tokio::try_join!(
                 client.batch_execute(DB_SCHEMA),
                 client.prepare("INSERT INTO users (name, email, password) VALUES ($1, $2, $3)"),
@@ -47,6 +49,8 @@ impl Db {
                 client.prepare("UPDATE trips SET owner_id = $1, description = $2, type = $3, status = $4, destination = $5, departure = $6, start_date = $7, end_date = $8 WHERE id = $9"),
                 client.prepare("DELETE FROM trips WHERE id = $1"),
                 client.prepare("DELETE FROM trip_shares WHERE trip_id = $1 AND user_id = $2"),
+                client.prepare("INSERT INTO trip_comments (trip_id, user_id, comment) VALUES ($1, $2, $3)"),
+                client.prepare("SELECT tc.trip_id, tc.user_id, tc.comment FROM trip_comments tc WHERE tc.trip_id = $1"),
             )?;
 
         println!("Database schema applied and statements prepared!");
@@ -62,6 +66,8 @@ impl Db {
             update_trip,
             delete_trip,
             delete_shared_trip,
+            insert_comment,
+            get_comments_from_trip,
         };
 
         Ok(Self { client, statements })

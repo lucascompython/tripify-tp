@@ -1,5 +1,5 @@
 use actix_web::{web, HttpResponse, Responder};
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 use tokio_postgres::types::ToSql;
 
 use crate::{
@@ -138,4 +138,69 @@ pub async fn update_location(
         .unwrap();
 
     HttpResponse::Ok().finish()
+}
+
+#[derive(Deserialize)]
+struct AddCommentRequest {
+    location_id: i32,
+    user_id: i32,
+    comment: String,
+}
+
+pub async fn add_comment(db: web::Data<Db>, data: web::Bytes) -> impl Responder {
+    let Json(comment): Json<AddCommentRequest> = Json::from_bytes(data).unwrap();
+
+    let row = db
+        .client
+        .query_one(
+            &db.statements.insert_location_comment,
+            &[&comment.location_id, &comment.user_id, &comment.comment],
+        )
+        .await
+        .unwrap();
+
+    let comment_id: i32 = row.get(0);
+
+    HttpResponse::Ok().body(comment_id.to_string())
+}
+
+#[derive(Serialize)]
+struct GetCommentResponse {
+    id: i32,
+    location_id: i32,
+    user_id: i32,
+    user_name: String,
+    comment: String,
+}
+
+pub async fn get_comments_from_location(
+    db: web::Data<Db>,
+    location_id: web::Path<i32>,
+) -> impl Responder {
+    let location_id = location_id.into_inner();
+
+    match db
+        .client
+        .query(&db.statements.get_comments_from_location, &[&location_id])
+        .await
+    {
+        Ok(rows) => {
+            let comments: Vec<GetCommentResponse> = rows
+                .iter()
+                .map(|row| GetCommentResponse {
+                    id: row.get(0),
+                    location_id: row.get(1),
+                    user_id: row.get(2),
+                    user_name: row.get(3),
+                    comment: row.get(4),
+                })
+                .collect();
+
+            json_response(&comments)
+        }
+        Err(e) => {
+            eprintln!("Error getting comments from location: {}", e);
+            HttpResponse::InternalServerError().finish()
+        }
+    }
 }

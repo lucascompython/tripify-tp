@@ -19,6 +19,14 @@ pub fn init(cfg: &mut web::ServiceConfig) {
             .route(
                 "/{trip_id}",
                 web::delete().to(crate::handlers::location_handlers::delete_location),
+            )
+            .route(
+                "/comment",
+                web::post().to(crate::handlers::location_handlers::add_comment),
+            )
+            .route(
+                "/{location_id}/comments",
+                web::get().to(crate::handlers::location_handlers::get_comments_from_location),
             ),
     );
 }

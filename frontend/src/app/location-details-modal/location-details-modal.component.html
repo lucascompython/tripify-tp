@@ -44,4 +44,17 @@
       <ion-label>{{ comment.user_name }}: {{ comment.comment }}</ion-label>
     </ion-item>
   </ion-list>
+
+  <form [formGroup]="commentForm" (ngSubmit)="addComment()">
+    <ion-item>
+      <ion-label position="stacked">Add Comment</ion-label>
+      <ion-textarea
+        formControlName="comment"
+        placeholder="Enter your comment"
+      ></ion-textarea>
+    </ion-item>
+    <ion-button expand="full" type="submit" [disabled]="commentForm.invalid"
+      >Submit</ion-button
+    >
+  </form>
 </ion-content>

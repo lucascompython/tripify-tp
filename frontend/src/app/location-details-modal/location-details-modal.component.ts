@@ -5,6 +5,7 @@ import {
   API_URL,
   Location as BaseLocation,
   Comment,
+  LocationComment,
 } from '../utils/api_utils';
 import {
   IonButton,
@@ -15,10 +16,12 @@ import {
   IonLabel,
   IonList,
   IonListHeader,
+  IonTextarea,
   IonTitle,
   IonToolbar,
 } from '@ionic/angular/standalone';
 import { CommonModule, DatePipe } from '@angular/common';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 interface Location extends BaseLocation {
   id: number;
@@ -42,14 +45,24 @@ interface Location extends BaseLocation {
     IonList,
     IonListHeader,
     CommonModule,
+    ReactiveFormsModule,
+    IonTextarea,
   ],
   providers: [ModalController],
 })
 export class LocationDetailsModalComponent implements OnInit {
   @Input() location!: Location;
-  comments: Comment[] = [];
+  comments: LocationComment[] = [];
+  commentForm!: FormGroup;
 
-  constructor(private modalController: ModalController) {}
+  constructor(
+    private modalController: ModalController,
+    private fb: FormBuilder
+  ) {
+    this.commentForm = this.fb.group({
+      comment: [''],
+    });
+  }
 
   ngOnInit() {
     this.fetchComments();
@@ -63,6 +76,34 @@ export class LocationDetailsModalComponent implements OnInit {
       this.comments = await response.json();
     } else {
       console.error('Failed to fetch comments');
+    }
+  }
+
+  async addComment() {
+    const comment = {
+      location_id: this.location.id,
+      user_id: parseInt(localStorage.getItem('user_id')!),
+      comment: this.commentForm.value.comment,
+    };
+    console.log(JSON.stringify(comment));
+    const response = await authFetch(`${API_URL}/locations/comment`, {
+      method: 'POST',
+      body: JSON.stringify(comment),
+    });
+    if (response.ok) {
+      this.fetchComments();
+      const commentId = await response.text();
+      const comment: LocationComment = {
+        id: parseInt(commentId),
+        location_id: this.location.id,
+        user_id: parseInt(localStorage.getItem('user_id')!),
+        user_name: localStorage.getItem('user_name')!,
+        comment: this.commentForm.value.comment,
+      };
+      this.comments.push(comment);
+      this.commentForm.reset();
+    } else {
+      console.error('Failed to add comment');
     }
   }
 

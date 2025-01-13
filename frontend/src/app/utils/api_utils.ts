@@ -97,3 +97,11 @@ export interface Location {
   start_date: Date;
   end_date: Date;
 }
+
+export interface LocationComment {
+  id: number;
+  location_id: number;
+  user_id: number;
+  user_name: string;
+  comment: string;
+}

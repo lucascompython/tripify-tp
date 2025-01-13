@@ -1,15 +1,74 @@
-<ion-header [translucent]="true">
+<ion-header collapse="condense">
   <ion-toolbar>
-    <img src="assets/logo.png" alt="logo" />
+    <ion-title size="large">Create Trip</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="form-container">
+    <form [formGroup]="tripForm" (ngSubmit)="createTrip()" class="trip-form">
+      <ion-item>
+        <ion-label position="stacked">Description</ion-label>
+        <ion-input
+          formControlName="description"
+          placeholder="Enter description"
+        ></ion-input>
+      </ion-item>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+      <ion-item>
+        <ion-label position="stacked">Type</ion-label>
+        <ion-select formControlName="type" placeholder="Select type">
+          <ion-select-option *ngFor="let type of tripTypes" [value]="type">
+            {{ type }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Status</ion-label>
+        <ion-select formControlName="status" placeholder="Select status">
+          <ion-select-option
+            *ngFor="let status of tripStatuses"
+            [value]="status"
+          >
+            {{ status }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Destination</ion-label>
+        <ion-input
+          formControlName="destination"
+          placeholder="Enter destination"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Departure</ion-label>
+        <ion-input
+          formControlName="departure"
+          placeholder="Enter departure"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Start Date</ion-label>
+        <ion-input formControlName="start_date" type="date"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">End Date</ion-label>
+        <ion-input formControlName="end_date" type="date"></ion-input>
+      </ion-item>
+
+      <ion-button
+        expand="full"
+        type="submit"
+        class="submit-button"
+        [disabled]="tripForm.invalid"
+        >Create Trip</ion-button
+      >
+    </form>
+  </div>
 </ion-content>

@@ -27,16 +27,12 @@ import { Router } from '@angular/router';
   styleUrls: ['tab1.page.scss'],
   imports: [
     CommonModule,
-    IonHeader,
-    IonToolbar,
     IonContent,
     IonList,
     IonItem,
     IonLabel,
     IonButton,
     IonIcon,
-    IonButtons,
-    IonPopover,
   ],
 })
 export class Tab1Page {
@@ -58,17 +54,6 @@ export class Tab1Page {
     getTrips().then((trips) => {
       this.trips = trips;
     });
-  }
-
-  async goToProfile() {
-    await this.popoverController.dismiss();
-    this.router.navigate(['/profile']);
-  }
-
-  async signOut() {
-    await this.popoverController.dismiss();
-    localStorage.removeItem('token');
-    this.router.navigate(['/login']);
   }
 
   async showTripDetails(trip: Trip) {

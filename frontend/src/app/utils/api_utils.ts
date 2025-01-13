@@ -27,13 +27,13 @@ export async function authFetch(
 }
 
 export enum TripType {
-  Business = 'business',
-  Personal = 'personal',
+  Business = 'Business',
+  Personal = 'Personal',
 }
 export enum TripStatus {
-  Planned = 'planned',
-  Completed = 'completed',
-  Cancelled = 'cancelled',
+  Planned = 'Planned',
+  Completed = 'Completed',
+  Cancelled = 'Cancelled',
 }
 
 export interface Trip {

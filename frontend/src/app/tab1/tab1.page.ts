@@ -16,6 +16,7 @@ import {
 import { createOutline, trashOutline } from 'ionicons/icons';
 import { authFetch, API_URL, getTrips, Trip } from '../utils/api_utils';
 import { EditTripModalComponent } from '../edit-trip-modal/edit-trip-modal.component';
+import { TripDetailsModalComponent } from '../trip-details-modal/trip-details-modal.component';
 import { addIcons } from 'ionicons';
 @Component({
   selector: 'app-tab1',
@@ -31,7 +32,6 @@ import { addIcons } from 'ionicons';
     IonLabel,
     IonButton,
     IonIcon,
-    EditTripModalComponent,
   ],
 })
 export class Tab1Page implements OnInit {
@@ -52,7 +52,18 @@ export class Tab1Page implements OnInit {
     });
   }
 
-  async editTrip(trip: Trip) {
+  async showTripDetails(trip: Trip) {
+    const modal = await this.modalController.create({
+      component: TripDetailsModalComponent,
+      componentProps: {
+        trip,
+      },
+    });
+    await modal.present();
+  }
+
+  async editTrip(event: Event, trip: Trip) {
+    event.stopPropagation();
     const modal = await this.modalController.create({
       component: EditTripModalComponent,
       componentProps: {
@@ -71,7 +82,9 @@ export class Tab1Page implements OnInit {
     await modal.present();
   }
 
-  async removeTrip(tripId: number) {
+  async removeTrip(event: Event, tripId: number) {
+    event.stopPropagation();
+
     const alert = await this.alertController.create({
       header: 'Confirm!',
       message: 'Are you sure you want to delete this trip?',

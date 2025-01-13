@@ -6,15 +6,19 @@
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let trip of trips">
+    <ion-item *ngFor="let trip of trips" (click)="showTripDetails(trip)">
       <ion-label>
         <h2>{{ trip.description }}</h2>
         <p>{{ trip.destination }} - {{ trip.departure }}</p>
       </ion-label>
-      <ion-button fill="clear" (click)="editTrip(trip)">
+      <ion-button fill="clear" (click)="editTrip($event, trip)">
         <ion-icon slot="icon-only" name="create-outline"></ion-icon>
       </ion-button>
-      <ion-button fill="clear" color="danger" (click)="removeTrip(trip.id)">
+      <ion-button
+        fill="clear"
+        color="danger"
+        (click)="removeTrip($event, trip.id)"
+      >
         <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
       </ion-button>
     </ion-item>

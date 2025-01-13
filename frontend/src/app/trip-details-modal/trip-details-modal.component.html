@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Trip Details</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label>Description</ion-label>
+    <div>{{ trip.description }}</div>
+  </ion-item>
+  <ion-item>
+    <ion-label>Type</ion-label>
+    <div>{{ trip.type }}</div>
+  </ion-item>
+  <ion-item>
+    <ion-label>Status</ion-label>
+    <div>{{ trip.status }}</div>
+  </ion-item>
+  <ion-item>
+    <ion-label>Destination</ion-label>
+    <div>{{ trip.destination }}</div>
+  </ion-item>
+  <ion-item>
+    <ion-label>Departure</ion-label>
+    <div>{{ trip.departure }}</div>
+  </ion-item>
+  <ion-item>
+    <ion-label>Start Date</ion-label>
+    <div>{{ trip.start_date | date : "longDate" }}</div>
+  </ion-item>
+  <ion-item>
+    <ion-label>End Date</ion-label>
+    <div>{{ trip.end_date | date : "longDate" }}</div>
+  </ion-item>
+</ion-content>

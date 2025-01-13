@@ -9,6 +9,7 @@ import {
   IonLabel,
   IonButton,
   ModalController,
+  IonIcon,
 } from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import {
@@ -19,6 +20,8 @@ import {
 import { EditLocationModalComponent } from '../edit-location-modal/edit-location-modal.component';
 import { LocationDetailsModalComponent } from '../location-details-modal/location-details-modal.component';
 import { CommonModule } from '@angular/common';
+import { addIcons } from 'ionicons';
+import { createOutline, trashOutline } from 'ionicons/icons';
 
 interface Location extends BaseLocation {
   id: number;
@@ -40,12 +43,18 @@ interface Location extends BaseLocation {
     IonLabel,
     IonButton,
     CommonModule,
+    IonIcon,
   ],
 })
 export class Tab3Page implements OnInit {
   locations: Location[] = [];
 
-  constructor(private modalController: ModalController) {}
+  constructor(private modalController: ModalController) {
+    addIcons({
+      'create-outline': createOutline,
+      'trash-outline': trashOutline,
+    });
+  }
 
   ngOnInit() {
     this.fetchLocations();

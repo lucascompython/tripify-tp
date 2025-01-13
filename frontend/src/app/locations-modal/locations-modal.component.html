@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Locations</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let location of locations">
+      <ion-label>
+        <h2>{{ location.location }}</h2>
+        <p>Description: {{ location.description }}</p>
+        <p>Type: {{ location.type }}</p>
+        <p>Status: {{ location.status }}</p>
+        <p>
+          Date: {{ location.start_date | date : "longDate" }} -
+          {{ location.end_date | date : "longDate" }}
+        </p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

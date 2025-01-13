@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::{
     db::Db,
-    models::trip::Trip,
+    models::{location::Location, trip::Trip},
     utils::json_utils::{json_response, Json},
 };
 
@@ -52,8 +52,9 @@ struct AddTripRequest {
 pub async fn add_trip(db: web::Data<Db>, data: web::Bytes) -> impl Responder {
     let Json(trip): Json<AddTripRequest> = Json::from_bytes(data).unwrap();
 
-    db.client
-        .execute(
+    let row = db
+        .client
+        .query_one(
             &db.statements.insert_trip,
             &[
                 &trip.owner_id,
@@ -69,7 +70,9 @@ pub async fn add_trip(db: web::Data<Db>, data: web::Bytes) -> impl Responder {
         .await
         .unwrap();
 
-    HttpResponse::Ok().finish()
+    let trip_id: i32 = row.get(0);
+
+    HttpResponse::Ok().body(trip_id.to_string())
 }
 
 pub async fn update_trip(
@@ -241,6 +244,34 @@ pub async fn get_comments(db: web::Data<Db>, trip_id: web::Path<i32>) -> impl Re
                 })
                 .collect();
             json_response(&comments)
+        }
+        Err(_) => HttpResponse::InternalServerError().finish(),
+    }
+}
+
+pub async fn get_locations(db: web::Data<Db>, trip_id: web::Path<i32>) -> impl Responder {
+    let trip_id = trip_id.into_inner();
+
+    match db
+        .client
+        .query(&db.statements.get_locations_from_trip_id, &[&trip_id])
+        .await
+    {
+        Ok(rows) => {
+            let locations: Vec<Location> = rows
+                .iter()
+                .map(|row| Location {
+                    id: row.get(0),
+                    trip_id: row.get(1),
+                    description: row.get(2),
+                    type_: row.get(3),
+                    status: row.get(4),
+                    location: row.get(5),
+                    start_date: row.get(6),
+                    end_date: row.get(7),
+                })
+                .collect();
+            json_response(&locations)
         }
         Err(_) => HttpResponse::InternalServerError().finish(),
     }

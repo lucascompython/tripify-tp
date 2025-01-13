@@ -18,6 +18,9 @@ import {
 import { API_URL, authFetch, Comment, Trip, User } from '../utils/api_utils';
 import { ShareTripModalComponent } from '../share-trip-modal/share-trip-modal.component';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { LocationsModalComponent } from '../locations-modal/locations-modal.component';
+import { Location } from '../utils/api_utils';
+import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'app-trip-details-modal',
@@ -49,6 +52,7 @@ export class TripDetailsModalComponent implements OnInit {
   owner: User | null = null;
   commentForm: FormGroup;
   comments: Comment[] = [];
+  locations: Location[] = [];
 
   constructor(
     private modalController: ModalController,
@@ -65,6 +69,12 @@ export class TripDetailsModalComponent implements OnInit {
       this.getOwner();
     }
     this.fetchComments();
+    this.fetchLocations();
+  }
+
+  async fetchLocations() {
+    const resp = await authFetch(`${API_URL}/trips/${this.trip.id}/locations`);
+    this.locations = await resp.json();
   }
 
   async fetchComments() {
@@ -118,6 +128,15 @@ export class TripDetailsModalComponent implements OnInit {
 
     const user: User = await resp.json();
     this.owner = user;
+  }
+
+  async openLocationsModal() {
+    const modal = await this.modalController.create({
+      component: LocationsModalComponent,
+      componentProps: { locations: this.locations },
+    });
+
+    await modal.present();
   }
 
   closeModal() {

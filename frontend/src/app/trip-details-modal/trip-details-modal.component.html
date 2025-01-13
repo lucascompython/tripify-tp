@@ -40,6 +40,9 @@
     <ion-label>Owner</ion-label>
     <div>{{ owner.name }} ({{ owner.email }})</div>
   </ion-item>
+  <ion-item button (click)="openLocationsModal()">
+    <ion-label>View Locations</ion-label>
+  </ion-item>
 
   <!-- Section for displaying comments -->
   <div class="comments-section">

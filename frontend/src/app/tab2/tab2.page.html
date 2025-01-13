@@ -62,6 +62,15 @@
         <ion-input formControlName="end_date" type="date"></ion-input>
       </ion-item>
 
+      <ion-item>
+        <ion-label position="stacked">Locations</ion-label>
+        <ion-input
+          [value]="selectedLocations.length + ' locations selected'"
+          readonly
+          (click)="openSelectLocationModal()"
+        ></ion-input>
+      </ion-item>
+
       <ion-button
         expand="full"
         type="submit"

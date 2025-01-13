@@ -82,3 +82,18 @@ export interface Comment {
   user_name: string;
   comment: string;
 }
+
+export enum LocationStatus {
+  Visited = 'Visited',
+  Planned = 'Planned',
+}
+
+export interface Location {
+  trip_id: number;
+  description: string;
+  type: string;
+  status: LocationStatus;
+  location: string;
+  start_date: Date;
+  end_date: Date;
+}

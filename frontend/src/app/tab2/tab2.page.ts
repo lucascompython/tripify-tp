@@ -10,27 +10,33 @@ import { CommonModule } from '@angular/common';
 import {
   API_URL,
   authFetch,
+  Location,
   Trip,
   TripStatus,
   TripType,
 } from '../utils/api_utils';
-import { ToastController } from '@ionic/angular/standalone';
+import { ModalController, ToastController } from '@ionic/angular/standalone';
+import { SelectLocationModalComponent } from '../select-location-modal/select-location-modal.component';
 
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss'],
   imports: [IonicModule, CommonModule, ReactiveFormsModule],
+  providers: [ModalController],
   standalone: true,
 })
 export class Tab2Page implements OnInit {
   tripForm: FormGroup;
   tripTypes = Object.keys(TripType);
   tripStatuses = Object.keys(TripStatus);
+  selectedLocations: Location[] = [];
+  newLocations: Location[] = [];
 
   constructor(
     private fb: FormBuilder,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private modalController: ModalController
   ) {
     this.tripForm = this.fb.group({
       description: ['', Validators.required],
@@ -63,15 +69,29 @@ export class Tab2Page implements OnInit {
         ...tripData,
       };
 
-      const resp = await authFetch(`${API_URL}/trips/add`, {
+      const respTrip = await authFetch(`${API_URL}/trips/add`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(trip),
       });
+      const tripId = parseInt(await respTrip.text());
 
-      if (resp.ok) {
+      if (this.newLocations.length > 0) {
+        for (let i = 0; i < this.newLocations.length; i++) {
+          this.newLocations[i].trip_id = tripId;
+        }
+        await authFetch(`${API_URL}/locations/add`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(this.newLocations),
+        });
+      }
+
+      if (respTrip.ok) {
         this.tripForm.reset();
         const toast = await this.toastController.create({
           message: 'Trip created successfully',
@@ -80,5 +100,20 @@ export class Tab2Page implements OnInit {
         toast.present();
       }
     }
+  }
+
+  async openSelectLocationModal() {
+    const modal = await this.modalController.create({
+      component: SelectLocationModalComponent,
+    });
+
+    await modal.present();
+
+    modal.onDidDismiss().then((data) => {
+      if (data.data) {
+        this.selectedLocations = data.data.selectedLocations;
+        this.newLocations = data.data.newLocations;
+      }
+    });
   }
 }

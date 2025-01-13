@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Select Locations</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let location of locations">
+      <ion-label>{{ location.location }}</ion-label>
+      <ion-checkbox
+        slot="start"
+        [checked]="isSelected(location)"
+        (ionChange)="toggleLocationSelection(location)"
+      ></ion-checkbox>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="openAddLocationModal()">Add Location</ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="confirmSelection()">Confirm</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

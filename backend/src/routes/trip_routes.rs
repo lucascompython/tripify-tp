@@ -39,6 +39,10 @@ pub fn init(cfg: &mut web::ServiceConfig) {
             .route(
                 "/{trip_id}/comments",
                 web::get().to(crate::handlers::trip_handlers::get_comments),
+            )
+            .route(
+                "/{trip_id}/locations",
+                web::get().to(crate::handlers::trip_handlers::get_locations),
             ),
     );
 }

@@ -1,0 +1,637 @@
+{
+	"info": {
+		"_postman_id": "f1aac84c-50e0-46fe-9fb9-f6a1a71d0170",
+		"name": "Tripify",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19509548"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"joao\",\n    \"email\": \"joao@gmail.com\",\n    \"password\": \"1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/users/register",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "token_resonse",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"joao\",\n    \"email\": \"joao@gmail.com\",\n    \"password\": \"1234\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/users/register",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										"register"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "content-length",
+									"value": "136"
+								},
+								{
+									"key": "date",
+									"value": "Sun, 12 Jan 2025 15:29:37 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2FvQGdtYWlsLmNvbSIsImV4cCI6MTczNjY5OTM3N30.XDtH67FX2BTDLlwZvXRG2RrXIo63RAfghUw_yfAL2tE"
+						}
+					]
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "check",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "get_all",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsdWNhc0BnbWFpbC5jb20iLCJleHAiOjE3MzY3NTg0NTN9.x-93jo6CSwbhbam8p_UJ8UB3E3d_aI1-oYDthD9HLuY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/users/get_all",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								"get_all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_user_by_id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsdWNhc0BnbWFpbC5jb20iLCJleHAiOjE3MzY3NTg0NTN9.x-93jo6CSwbhbam8p_UJ8UB3E3d_aI1-oYDthD9HLuY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/users/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "trip",
+			"item": [
+				{
+					"name": "get_trip",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsdWNhc0BnbWFpbC5jb20iLCJleHAiOjE3MzY3NTg0NTN9.x-93jo6CSwbhbam8p_UJ8UB3E3d_aI1-oYDthD9HLuY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/trips/3",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"trips",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add_trip",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsdWNhc0BnbWFpbC5jb20iLCJleHAiOjE3MzY3Nzg5Mjl9.8ELCzvm5GiuyC2A0A44aj5SLEcHa7kZEBH4lb9g6V1Q",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"owner_id\": 1,\n    \"description\": \"Ai nao\",\n    \"type\": \"Business\",\n    \"status\": \"Planned\",\n    \"destination\": \"Viana do Castelo\",\n    \"departure\": \"Vigo\",\n    \"start_date\": \"2023-12-12\",\n    \"end_date\": \"2023-12-22\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/trips/add",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"trips",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_request",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsdWNhc0BnbWFpbC5jb20iLCJleHAiOjE3MzY3MzMyNjR9.jVAnQl6lW8vkvylbAavrtqqISJDDvexvIagZvyoEOB8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"owner_id\": 1,\n    \"description\": \"dsadsasa\",\n    \"type\": \"Business\",\n    \"status\": \"Completed\",\n    \"destination\": \"Lisboa\",\n    \"departure\": \"Braga\",\n    \"start_date\": \"2023-12-12\",\n    \"end_date\": \"2023-12-22\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/trips/3",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"trips",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_post",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsdWNhc0BnbWFpbC5jb20iLCJleHAiOjE3MzY3MzMyNjR9.jVAnQl6lW8vkvylbAavrtqqISJDDvexvIagZvyoEOB8",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/trips/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"trips",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "share_trip",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsdWNhc0BnbWFpbC5jb20iLCJleHAiOjE3MzY3NjIxOTR9.k4pf2h8xqw8uTmlTvNuFg2o-6XXpO3E_9FV8D9QdnDo",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"trip_id\": 3,\n    \"user_ids\": [3]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/trips/share",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"trips",
+								"share"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_shared_trip",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsdWNhc0BnbWFpbC5jb20iLCJleHAiOjE3MzY3NjIxOTR9.k4pf2h8xqw8uTmlTvNuFg2o-6XXpO3E_9FV8D9QdnDo",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"trip_id\": 4,\n    \"user_id\": 3\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/trips/delete_shared",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"trips",
+								"delete_shared"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_valid_users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsdWNhc0BnbWFpbC5jb20iLCJleHAiOjE3MzY3NjIxOTR9.k4pf2h8xqw8uTmlTvNuFg2o-6XXpO3E_9FV8D9QdnDo",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/trips/3/1/valid_users",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"trips",
+								"3",
+								"1",
+								"valid_users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add_comment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsdWNhc0BnbWFpbC5jb20iLCJleHAiOjE3MzY3NjY4NTd9.0hqdf6PBA20JlbSae7ewtpAO4jSez3mNY8zBD9SZDxU",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"trip_id\": 3,\n    \"user_id\": 1,\n    \"comment\": \"Bue da fixe mano\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/trips/comment",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"trips",
+								"comment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_comments_from_trip",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsdWNhc0BnbWFpbC5jb20iLCJleHAiOjE3MzY3NjY4NTd9.0hqdf6PBA20JlbSae7ewtpAO4jSez3mNY8zBD9SZDxU",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/trips/3/comments",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"trips",
+								"3",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "locations",
+			"item": [
+				{
+					"name": "get_locations",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsdWNhc0BnbWFpbC5jb20iLCJleHAiOjE3MzY3ODEwMjB9.VCPeARxwwAUuwjNAkrB6FzIyA8CdZcjTqsFnEfkzgOo",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/locations/get",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"locations",
+								"get"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add_locations",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsdWNhc0BnbWFpbC5jb20iLCJleHAiOjE3MzY3NzQ4ODl9.rmobmuFJYGJKLjzFKtnsujk85bPpAiFjGqbXQncngQ8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"trip_id\": 3,\n        \"description\": \"Grande cidade\",\n        \"type\": \"City\",\n        \"status\": \"Cancelled\",\n        \"location\": \"Porto\",\n        \"start_date\": \"2023-12-12\",\n        \"end_date\": \"2023-12-22\"\n    }\n]\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/locations/add",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"locations",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_location",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsdWNhc0BnbWFpbC5jb20iLCJleHAiOjE3MzY3NzQ4ODl9.rmobmuFJYGJKLjzFKtnsujk85bPpAiFjGqbXQncngQ8",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/locations/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"locations",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_location",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsdWNhc0BnbWFpbC5jb20iLCJleHAiOjE3MzY3NzQ4ODl9.rmobmuFJYGJKLjzFKtnsujk85bPpAiFjGqbXQncngQ8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\": \"Cheira mdasdsaal\",\n    \"type\": \"City\",\n    \"status\": \"Cancelled\",\n    \"location\": \"Porto\",\n    \"start_date\": \"2023-12-12\",\n    \"end_date\": \"2023-12-22\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/locations/3",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"locations",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_locations_from_trip",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsdWNhc0BnbWFpbC5jb20iLCJleHAiOjE3MzY3Nzg5Mjl9.8ELCzvm5GiuyC2A0A44aj5SLEcHa7kZEBH4lb9g6V1Q",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/trips/9/locations",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"trips",
+								"9",
+								"locations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add_comment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsdWNhc0BnbWFpbC5jb20iLCJleHAiOjE3MzY3ODEwMjB9.VCPeARxwwAUuwjNAkrB6FzIyA8CdZcjTqsFnEfkzgOo",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"location_id\": 7,\n    \"user_id\": 3,\n    \"comment\": \"Grande cena pah\" \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/locations/comment",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"locations",
+								"comment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_comments_from_location",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsdWNhc0BnbWFpbC5jb20iLCJleHAiOjE3MzY3ODEwMjB9.VCPeARxwwAUuwjNAkrB6FzIyA8CdZcjTqsFnEfkzgOo",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/locations/5/comments",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"locations",
+								"5",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "0.0.0.0:1234"
+		}
+	]
+}

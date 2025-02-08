@@ -21,6 +21,8 @@ export class AppComponent implements OnInit {
   async checkUser() {
     try {
       const resp = await authFetch(`${API_URL}/users/check`);
+      console.log('resp', resp);
+
       if (!resp.ok) {
         if (
           window.location.pathname !== '/login' &&

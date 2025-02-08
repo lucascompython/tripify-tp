@@ -19,6 +19,7 @@ import {
   IonButtons,
   IonSelectOption,
   IonSelect,
+  ToastController,
 } from '@ionic/angular/standalone';
 import { authFetch, API_URL, TripType, TripStatus } from '../utils/api_utils';
 
@@ -51,7 +52,8 @@ export class EditTripModalComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private toastController: ToastController
   ) {
     this.editTripForm = this.fb.group({
       description: ['', Validators.required],
@@ -93,8 +95,19 @@ export class EditTripModalComponent implements OnInit {
         if (response.ok) {
           updatedTrip.id = this.trip.id;
           this.modalController.dismiss(updatedTrip);
+          const toast = await this.toastController.create({
+            message: 'Trip updated',
+            color: 'success',
+            duration: 2000,
+          });
+          await toast.present();
         } else {
-          console.error('Failed to update trip');
+          const toast = await this.toastController.create({
+            message: 'Failed to update trip',
+            color: 'danger',
+            duration: 2000,
+          });
+          await toast.present();
         }
       } catch (error) {
         console.error('API error:', error);

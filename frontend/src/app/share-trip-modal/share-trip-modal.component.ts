@@ -95,13 +95,19 @@ export class ShareTripModalComponent implements OnInit {
         const userNames = users.map((user) => user.name).join(', ');
         const toast = await this.toastController.create({
           message: `Trip shared successfully with ${userNames}!`,
-          duration: 5000,
+          color: 'success',
+          duration: 2000,
         });
-        toast.present();
+        await toast.present();
 
         this.modalController.dismiss();
       } else {
-        console.error('Failed to share trip');
+        const toast = await this.toastController.create({
+          message: 'Failed to share trip',
+          color: 'danger',
+          duration: 2000,
+        });
+        await toast.present();
       }
     } catch (error) {
       console.error('API error:', error);

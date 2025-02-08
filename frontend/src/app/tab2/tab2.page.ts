@@ -95,9 +95,17 @@ export class Tab2Page implements OnInit {
         this.tripForm.reset();
         const toast = await this.toastController.create({
           message: 'Trip created successfully',
+          color: 'success',
           duration: 2000,
         });
-        toast.present();
+        await toast.present();
+      } else {
+        const toast = await this.toastController.create({
+          message: 'Failed to create trip',
+          color: 'danger',
+          duration: 2000,
+        });
+        await toast.present();
       }
     }
   }

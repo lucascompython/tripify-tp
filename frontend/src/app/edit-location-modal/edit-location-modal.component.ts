@@ -80,11 +80,17 @@ export class EditLocationModalComponent implements OnInit {
         this.modalController.dismiss(locationData);
         const toast = await this.toastController.create({
           message: 'Location updated',
+          color: 'success',
           duration: 2000,
         });
         await toast.present();
       } else {
-        console.error('Failed to update location');
+        const toast = await this.toastController.create({
+          message: 'Failed to update location',
+          color: 'danger',
+          duration: 2000,
+        });
+        await toast.present();
       }
     }
   }

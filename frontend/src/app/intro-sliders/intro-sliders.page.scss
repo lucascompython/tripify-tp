@@ -64,3 +64,11 @@ swiper-slide:first-child img {
     position: absolute;
     right: 0;
 }
+
+
+// on desktop make images smaller
+@media (min-width: 768px) {
+  swiper-slide img {
+    max-width: 20%;
+  }
+}

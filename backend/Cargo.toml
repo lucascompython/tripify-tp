@@ -14,11 +14,11 @@ tokio = { version = "1", default-features = false, features = [
     "rt-multi-thread",
     "macros",
 ] }
-tokio-postgres = { version = "0.7.12", features = ["with-chrono-0_4"] }
+tokio-postgres = { version = "0.7.13", features = ["with-chrono-0_4"] }
 argon2-kdf = { git = "https://github.com/lucascompython/argon2-kdf", branch = "main" }
 thiserror = "2.0.11"
 env_logger = { version = "0.11.6", optional = true }
-jsonwebtoken = { version = "9.3.0", default-features = false }
+jsonwebtoken = { version = "9.3.1", default-features = false }
 futures-util = "0.3.31"
 actix-cors = "0.7.0"
 

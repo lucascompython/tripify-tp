@@ -10,6 +10,9 @@ import {
   IonIcon,
   ModalController,
   PopoverController,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
 } from '@ionic/angular/standalone';
 import { createOutline, settingsOutline, trashOutline } from 'ionicons/icons';
 import { authFetch, API_URL, getTrips, Trip } from '../utils/api_utils';
@@ -29,6 +32,9 @@ import { Router } from '@angular/router';
     IonLabel,
     IonButton,
     IonIcon,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
   ],
 })
 export class Tab1Page {

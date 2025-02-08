@@ -64,8 +64,6 @@ export class EditLocationModalComponent implements OnInit {
 
       locationData.trip_id = this.location.trip_id;
 
-      console.log(JSON.stringify(locationData));
-
       const response = await authFetch(
         `${API_URL}/locations/${this.location.id}`,
         {

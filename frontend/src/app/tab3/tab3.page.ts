@@ -77,9 +77,7 @@ export class Tab3Page implements OnInit {
 
     modal.onDidDismiss().then((result) => {
       if (result.data) {
-        console.log(result.data);
         for (let i = 0; i < this.locations.length; i++) {
-          console.log('location id: ', this.locations[i].id);
           if (this.locations[i].id === result.data.id) {
             this.locations[i] = result.data;
             break;

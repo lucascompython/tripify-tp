@@ -1,0 +1,54 @@
+<ion-content>
+  <swiper-container #swiper [pagination]="{ clickable: false}">
+    <swiper-slide>
+      <h2>Welcome to Tripify!</h2>
+      <img src="assets/logo.png" alt="Welcome Image" />
+      <p>
+        Plan and register your trips with ease. Tripify helps you organize your
+        travel plans, keep track of your destinations, and ensure you have all
+        the information you need for a smooth journey.
+      </p>
+    </swiper-slide>
+    <swiper-slide>
+      <h2>Multiple Locations</h2>
+      <img src="assets/slide2.webp" alt="Multiple Locations Image" />
+      <p>
+        Add multiple locations to your trips and explore more. Whether you're
+        planning a road trip with several stops or an international adventure,
+        Tripify allows you to include all your destinations in one comprehensive
+        plan.
+      </p>
+    </swiper-slide>
+    <swiper-slide>
+      <h2>Share with Friends</h2>
+      <img src="assets/slide3.webp" alt="Share with Friends Image" />
+      <p>
+        Share your trips with other users and enjoy together. Invite friends and
+        family to join your trips, share itineraries, and make memories
+        together. Tripify makes it easy to collaborate and coordinate with your
+        travel companions.
+      </p>
+    </swiper-slide>
+    <swiper-slide>
+      <h2>Comment and Interact</h2>
+      <img src="assets/slide4.webp" alt="Comment and Interact Image" />
+      <p>
+        Comment on trips and locations to share your experiences. Provide
+        feedback, tips, and recommendations for other travelers. Engage with the
+        Tripify community and discover new places through the experiences of
+        others.
+      </p>
+    </swiper-slide>
+  </swiper-container>
+  <div class="buttons">
+    <ion-button
+      [style.display]="currentSlide > 0 ? 'block' : 'none'"
+      (click)="swipePrev()"
+      class="left-button"
+      >Previous</ion-button
+    >
+    <ion-button class="right-button" (click)="swipeNext()">
+      @if(currentSlide === 3) { Get Started } @else { Next }
+    </ion-button>
+  </div>
+</ion-content>

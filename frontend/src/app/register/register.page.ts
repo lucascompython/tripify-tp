@@ -79,7 +79,7 @@ export class RegisterPage {
           localStorage.setItem('name', name);
           localStorage.setItem('token', token);
 
-          window.location.pathname = '/';
+          this.router.navigate(['/login']);
         } else if (response.status === 409) {
           this.showAccountExistsAlert();
         } else {

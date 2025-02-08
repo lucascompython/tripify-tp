@@ -85,7 +85,6 @@ export class LocationDetailsModalComponent implements OnInit {
       user_id: parseInt(localStorage.getItem('user_id')!),
       comment: this.commentForm.value.comment,
     };
-    console.log(JSON.stringify(comment));
     const response = await authFetch(`${API_URL}/locations/comment`, {
       method: 'POST',
       body: JSON.stringify(comment),

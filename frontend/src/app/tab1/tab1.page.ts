@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   IonContent,
@@ -9,7 +9,6 @@ import {
   IonButton,
   IonIcon,
   ModalController,
-  PopoverController,
   IonHeader,
   IonToolbar,
   IonTitle,
@@ -19,7 +18,6 @@ import { authFetch, API_URL, getTrips, Trip } from '../utils/api_utils';
 import { EditTripModalComponent } from '../edit-trip-modal/edit-trip-modal.component';
 import { TripDetailsModalComponent } from '../trip-details-modal/trip-details-modal.component';
 import { addIcons } from 'ionicons';
-import { Router } from '@angular/router';
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -41,9 +39,7 @@ export class Tab1Page {
   trips: Trip[] = [];
   constructor(
     private alertController: AlertController,
-    private modalController: ModalController,
-    private popoverController: PopoverController,
-    private router: Router
+    private modalController: ModalController
   ) {
     addIcons({
       'create-outline': createOutline,

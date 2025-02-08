@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 import { authFetch, API_URL } from './utils/api_utils';
+import { register } from 'swiper/element/bundle';
+
+register();
 
 @Component({
   selector: 'app-root',
@@ -9,6 +12,7 @@ import { authFetch, API_URL } from './utils/api_utils';
   imports: [IonApp, IonRouterOutlet],
 })
 export class AppComponent implements OnInit {
+  hasShownIntro = false;
   constructor(private router: Router) {}
   ngOnInit() {
     this.checkUser();
@@ -22,7 +26,12 @@ export class AppComponent implements OnInit {
           window.location.pathname !== '/login' &&
           window.location.pathname !== '/register'
         ) {
-          this.router.navigate(['/login']);
+          if (!this.hasShownIntro) {
+            this.hasShownIntro = true;
+            this.router.navigate(['/intro-sliders']);
+          } else {
+            this.router.navigate(['/login']);
+          }
         }
       }
 
@@ -37,7 +46,12 @@ export class AppComponent implements OnInit {
         window.location.pathname !== '/register' &&
         window.location.pathname !== '/login'
       ) {
-        this.router.navigate(['/login']);
+        if (!this.hasShownIntro) {
+          this.hasShownIntro = true;
+          this.router.navigate(['/intro-sliders']);
+        } else {
+          this.router.navigate(['/login']);
+        }
       }
     }
   }

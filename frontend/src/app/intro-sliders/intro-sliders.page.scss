@@ -1,0 +1,66 @@
+ion-content {
+  display: flex;
+  justify-content: flex-start; /* Align items to the top */
+  align-items: center;
+  height: 100%;
+  padding-top: 20px; /* Add some padding to the top */
+  padding-left: 20px; /* Add padding to the left */
+  padding-right: 20px; /* Add padding to the right */
+}
+
+swiper-container {
+  width: 100%;
+  height: 100%;
+}
+
+swiper-slide {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Align items to the top */
+  align-items: center;
+  text-align: center;
+  padding-top: 150px; /* Add some padding to the top */
+  padding-left: 20px; /* Add padding to the left */
+  padding-right: 20px; /* Add padding to the right */
+}
+
+swiper-slide h2 {
+  margin-bottom: 10px;
+}
+
+swiper-slide p {
+  margin-bottom: 20px;
+}
+
+swiper-slide img {
+  max-width: 60%;
+  height: auto;
+}
+
+swiper-slide:first-child img {
+  max-width: 100%;
+}
+
+.buttons {
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  width: 80%;
+  padding-left: 20px; 
+  padding-right: 20px; 
+  z-index: 1000; 
+}
+
+
+.left-button {
+    position: absolute;
+    left: 0;
+}
+
+.right-button {
+    position: absolute;
+    right: 0;
+}

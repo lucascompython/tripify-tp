@@ -11,7 +11,6 @@ import {
   ModalController,
   IonIcon,
 } from '@ionic/angular/standalone';
-import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import {
   API_URL,
   authFetch,

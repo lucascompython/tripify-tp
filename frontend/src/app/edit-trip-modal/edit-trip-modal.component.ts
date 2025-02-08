@@ -91,6 +91,7 @@ export class EditTripModalComponent implements OnInit {
         });
 
         if (response.ok) {
+          updatedTrip.id = this.trip.id;
           this.modalController.dismiss(updatedTrip);
         } else {
           console.error('Failed to update trip');

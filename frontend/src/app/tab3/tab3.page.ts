@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   IonHeader,
   IonToolbar,
@@ -10,6 +10,7 @@ import {
   IonButton,
   ModalController,
   IonIcon,
+  IonSearchbar,
 } from '@ionic/angular/standalone';
 import {
   API_URL,
@@ -43,10 +44,12 @@ interface Location extends BaseLocation {
     IonButton,
     CommonModule,
     IonIcon,
+    IonSearchbar,
   ],
 })
 export class Tab3Page {
   locations: Location[] = [];
+  filteredLocations: Location[] = [];
 
   constructor(private modalController: ModalController) {
     addIcons({
@@ -59,10 +62,22 @@ export class Tab3Page {
     this.fetchLocations();
   }
 
+  filterLocations(event: Event) {
+    const query = (event.target as HTMLInputElement).value.toLowerCase();
+    if (query === '') {
+      this.filteredLocations = this.locations;
+    } else {
+      this.filteredLocations = this.locations.filter((location) =>
+        location.location.toLowerCase().includes(query)
+      );
+    }
+  }
+
   async fetchLocations() {
     const response = await authFetch(`${API_URL}/locations/get`);
     if (response.ok) {
       this.locations = await response.json();
+      this.filteredLocations = this.locations;
     } else {
       console.error('Failed to fetch locations');
     }

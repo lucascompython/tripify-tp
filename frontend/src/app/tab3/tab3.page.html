@@ -1,13 +1,19 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Locations</ion-title>
+    <div class="toolbar-content">
+      <ion-title>Locations</ion-title>
+      <ion-searchbar
+        (ionInput)="filterLocations($event)"
+        placeholder="Search Locations"
+      ></ion-searchbar>
+    </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
     <ion-item
-      *ngFor="let location of locations"
+      *ngFor="let location of filteredLocations"
       (click)="openLocationDetailsModal(location)"
     >
       <ion-label>

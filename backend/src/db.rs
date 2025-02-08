@@ -22,6 +22,7 @@ pub struct DbStatements {
     pub get_locations_from_trip_id: Statement,
     pub insert_location_comment: Statement,
     pub get_comments_from_location: Statement,
+    pub update_user: Statement,
 }
 
 pub struct Db {
@@ -64,6 +65,7 @@ impl Db {
             get_locations_from_trip_id,
             insert_location_comment,
             get_comments_from_location,
+            update_user,
         ) = tokio::try_join!(
             client.batch_execute(DB_SCHEMA),
             client.prepare("INSERT INTO users (name, email, password) VALUES ($1, $2, $3)"),
@@ -85,6 +87,7 @@ impl Db {
             client.prepare("SELECT id, trip_id, description, type, status, location, start_date, end_date FROM locations WHERE trip_id = $1"),
             client.prepare("INSERT INTO location_comments (location_id, user_id, comment) VALUES ($1, $2, $3) RETURNING id"),
             client.prepare("SELECT lc.id, lc.location_id, lc.user_id, u.name AS user_name, lc.comment FROM location_comments lc JOIN users u ON lc.user_id = u.id WHERE lc.location_id = $1"),
+            client.prepare("UPDATE users SET name = $1, email = $2, password = $3 WHERE id = $4"),
         )?;
 
         println!("Database schema applied and statements prepared!");
@@ -109,6 +112,7 @@ impl Db {
             get_locations_from_trip_id,
             insert_location_comment,
             get_comments_from_location,
+            update_user,
         };
 
         Ok(Self { client, statements })

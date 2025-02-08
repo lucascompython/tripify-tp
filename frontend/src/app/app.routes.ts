@@ -21,4 +21,9 @@ export const routes: Routes = [
         (m) => m.IntroSlidersPage
       ),
   },
+  {
+    path: 'profile',
+    loadComponent: () =>
+      import('./profile/profile.page').then((m) => m.ProfilePage),
+  },
 ];

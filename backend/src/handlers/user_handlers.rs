@@ -51,12 +51,6 @@ struct LoginRequest {
     password: String,
 }
 
-#[derive(Serialize)]
-struct LoginReponse {
-    id: i32,
-    name: String,
-}
-
 pub async fn login(db: web::Data<Db>, data: web::Bytes) -> impl Responder {
     let Json(user_request): Json<LoginRequest> = Json::from_bytes(data).unwrap();
 
@@ -116,4 +110,36 @@ pub async fn get_user(db: web::Data<Db>, user_id: web::Path<i32>) -> impl Respon
         }
         Err(_) => HttpResponse::NotFound().finish(),
     }
+}
+
+#[derive(Deserialize)]
+struct UpdateUserRequest {
+    name: String,
+    email: String,
+    password: String,
+}
+
+pub async fn update_user(
+    db: web::Data<Db>,
+    user_id: web::Path<i32>,
+    data: web::Bytes,
+) -> impl Responder {
+    let Json(user_request): Json<UpdateUserRequest> = Json::from_bytes(data).unwrap();
+
+    let password_bytes = hash(&user_request.password);
+
+    db.client
+        .execute(
+            &db.statements.update_user,
+            &[
+                &user_request.name,
+                &user_request.email,
+                &&password_bytes[..],
+                &user_id.into_inner(),
+            ],
+        )
+        .await
+        .unwrap();
+
+    HttpResponse::Ok().finish()
 }

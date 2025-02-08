@@ -45,7 +45,7 @@ interface Location extends BaseLocation {
     IonIcon,
   ],
 })
-export class Tab3Page implements OnInit {
+export class Tab3Page {
   locations: Location[] = [];
 
   constructor(private modalController: ModalController) {
@@ -55,7 +55,7 @@ export class Tab3Page implements OnInit {
     });
   }
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.fetchLocations();
   }
 

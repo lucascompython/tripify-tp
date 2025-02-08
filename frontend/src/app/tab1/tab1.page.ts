@@ -12,6 +12,7 @@ import {
   IonHeader,
   IonToolbar,
   IonTitle,
+  ToastController,
 } from '@ionic/angular/standalone';
 import { createOutline, settingsOutline, trashOutline } from 'ionicons/icons';
 import { authFetch, API_URL, getTrips, Trip } from '../utils/api_utils';
@@ -39,7 +40,8 @@ export class Tab1Page {
   trips: Trip[] = [];
   constructor(
     private alertController: AlertController,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private toastController: ToastController
   ) {
     addIcons({
       'create-outline': createOutline,
@@ -113,6 +115,12 @@ export class Tab1Page {
               });
             }
             const tripId = trip.id;
+            const toast = await this.toastController.create({
+              message: `Trip ${trip.description} deleted`,
+              color: 'success',
+              duration: 2000,
+            });
+            await toast.present();
             this.trips = this.trips.filter((trip) => trip.id !== tripId);
           },
         },

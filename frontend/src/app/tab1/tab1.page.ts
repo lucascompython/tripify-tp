@@ -13,6 +13,7 @@ import {
   IonToolbar,
   IonTitle,
   ToastController,
+  IonSearchbar,
 } from '@ionic/angular/standalone';
 import { createOutline, settingsOutline, trashOutline } from 'ionicons/icons';
 import { authFetch, API_URL, getTrips, Trip } from '../utils/api_utils';
@@ -34,10 +35,12 @@ import { addIcons } from 'ionicons';
     IonHeader,
     IonToolbar,
     IonTitle,
+    IonSearchbar,
   ],
 })
 export class Tab1Page {
   trips: Trip[] = [];
+  filteredTrips: Trip[] = [];
   constructor(
     private alertController: AlertController,
     private modalController: ModalController,
@@ -53,7 +56,19 @@ export class Tab1Page {
   ionViewWillEnter() {
     getTrips().then((trips) => {
       this.trips = trips;
+      this.filteredTrips = trips;
     });
+  }
+
+  filterTrips(event: Event) {
+    const query = (event.target as HTMLInputElement).value.toLowerCase();
+    if (query === '') {
+      this.filteredTrips = this.trips;
+    } else {
+      this.filteredTrips = this.trips.filter((trip) =>
+        trip.description.toLowerCase().includes(query)
+      );
+    }
   }
 
   async showTripDetails(trip: Trip) {

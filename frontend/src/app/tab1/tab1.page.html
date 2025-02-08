@@ -1,12 +1,21 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Trips</ion-title>
+    <div class="toolbar-content">
+      <ion-title>Trips</ion-title>
+      <ion-searchbar
+        (ionInput)="filterTrips($event)"
+        placeholder="Search Trips"
+      ></ion-searchbar>
+    </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let trip of trips" (click)="showTripDetails(trip)">
+    <ion-item
+      *ngFor="let trip of filteredTrips"
+      (click)="showTripDetails(trip)"
+    >
       <ion-label>
         <h2>{{ trip.description }}</h2>
         <p>{{ trip.destination }} - {{ trip.departure }}</p>

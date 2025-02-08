@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -26,7 +26,7 @@ import { SelectLocationModalComponent } from '../select-location-modal/select-lo
   providers: [ModalController],
   standalone: true,
 })
-export class Tab2Page implements OnInit {
+export class Tab2Page {
   tripForm: FormGroup;
   tripTypes = Object.keys(TripType);
   tripStatuses = Object.keys(TripStatus);
@@ -48,11 +48,6 @@ export class Tab2Page implements OnInit {
       end_date: ['', Validators.required],
     });
   }
-
-  ngOnInit() {}
-
-  async goToProfile() {}
-  async signOut() {}
 
   async createTrip() {
     if (this.tripForm.valid) {

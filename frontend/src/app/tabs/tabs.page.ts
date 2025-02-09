@@ -61,7 +61,7 @@ export class TabsPage {
 
   async goToProfile() {
     await this.popoverController.dismiss();
-    this.router.navigate(['/profile']);
+    this.router.navigate(['/tabs/profile']);
   }
 
   async signOut() {

@@ -72,7 +72,7 @@ impl Db {
             client.prepare("SELECT id, name, email, password FROM users WHERE email = $1"),
             client.prepare("SELECT id FROM users WHERE email = $1"),
             client.prepare("SELECT u.* FROM users u WHERE u.id != $1 AND u.id NOT IN (SELECT ts.user_id FROM trip_shares ts WHERE ts.trip_id = $2)"),
-            client.prepare("SELECT id, name, email FROM users WHERE id = $1"),
+            client.prepare("SELECT id, name, email, password FROM users WHERE id = $1"),
             client.prepare("SELECT t.* FROM trips t WHERE t.owner_id = $1 UNION SELECT t.* FROM trips t JOIN trip_shares ts ON t.id = ts.trip_id WHERE ts.user_id = $1"),
             client.prepare("INSERT INTO trips (owner_id, description, type, status, destination, departure, start_date, end_date) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id"),
             client.prepare("UPDATE trips SET owner_id = $1, description = $2, type = $3, status = $4, destination = $5, departure = $6, start_date = $7, end_date = $8 WHERE id = $9"),

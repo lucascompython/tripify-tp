@@ -116,7 +116,8 @@ pub async fn get_user(db: web::Data<Db>, user_id: web::Path<i32>) -> impl Respon
 struct UpdateUserRequest {
     name: String,
     email: String,
-    password: String,
+    new_password: String,
+    current_password: String,
 }
 
 pub async fn update_user(
@@ -126,7 +127,33 @@ pub async fn update_user(
 ) -> impl Responder {
     let Json(user_request): Json<UpdateUserRequest> = Json::from_bytes(data).unwrap();
 
-    let password_bytes = hash(&user_request.password);
+    let user_id = user_id.into_inner();
+
+    let current_password_bytes = match db
+        .client
+        .query_one(&db.statements.get_user_by_id, &[&user_id])
+        .await
+    {
+        Ok(row) => {
+            let password_slice: &[u8] = row.get(3);
+            let mut password_bytes = [0u8; 48];
+            password_bytes.copy_from_slice(password_slice);
+
+            if !verify(&user_request.current_password, &password_bytes) {
+                return HttpResponse::Unauthorized().finish();
+            }
+
+            password_bytes
+        }
+        Err(_) => return HttpResponse::Unauthorized().finish(),
+    };
+
+    let password_bytes: [u8; 48];
+    if user_request.new_password.len() == 0 {
+        password_bytes = current_password_bytes;
+    } else {
+        password_bytes = hash(&user_request.new_password);
+    }
 
     db.client
         .execute(
@@ -135,7 +162,7 @@ pub async fn update_user(
                 &user_request.name,
                 &user_request.email,
                 &&password_bytes[..],
-                &user_id.into_inner(),
+                &user_id,
             ],
         )
         .await

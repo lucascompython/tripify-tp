@@ -20,7 +20,7 @@ import { ShareTripModalComponent } from '../share-trip-modal/share-trip-modal.co
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { LocationsModalComponent } from '../locations-modal/locations-modal.component';
 import { Location } from '../utils/api_utils';
-import { IonicModule } from '@ionic/angular';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-trip-details-modal',
@@ -42,6 +42,7 @@ import { IonicModule } from '@ionic/angular';
     IonList,
     IonListHeader,
     ReactiveFormsModule,
+    TranslateModule,
   ],
   providers: [DatePipe],
   standalone: true,

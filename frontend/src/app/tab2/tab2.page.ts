@@ -17,12 +17,13 @@ import {
 } from '../utils/api_utils';
 import { ModalController, ToastController } from '@ionic/angular/standalone';
 import { SelectLocationModalComponent } from '../select-location-modal/select-location-modal.component';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss'],
-  imports: [IonicModule, CommonModule, ReactiveFormsModule],
+  imports: [IonicModule, CommonModule, ReactiveFormsModule, TranslateModule],
   providers: [ModalController],
   standalone: true,
 })
@@ -36,7 +37,8 @@ export class Tab2Page {
   constructor(
     private fb: FormBuilder,
     private toastController: ToastController,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private translateService: TranslateService
   ) {
     this.tripForm = this.fb.group({
       description: ['', Validators.required],
@@ -89,14 +91,18 @@ export class Tab2Page {
       if (respTrip.ok) {
         this.tripForm.reset();
         const toast = await this.toastController.create({
-          message: 'Trip created successfully',
+          message: this.translateService.instant('ADD_TRIP.TRIP_CREATED', {
+            tripName: trip.description,
+          }),
           color: 'success',
           duration: 2000,
         });
         await toast.present();
       } else {
         const toast = await this.toastController.create({
-          message: 'Failed to create trip',
+          message: this.translateService.instant(
+            'ADD_TRIP.FAILED_TO_CREATE_TRIP'
+          ),
           color: 'danger',
           duration: 2000,
         });

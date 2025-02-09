@@ -14,6 +14,7 @@ import {
   Location as BaseLocation,
 } from '../utils/api_utils';
 import { ToastController } from '@ionic/angular/standalone';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 interface Location extends BaseLocation {
   id: number;
@@ -23,18 +24,19 @@ interface Location extends BaseLocation {
   selector: 'app-edit-location-modal',
   templateUrl: './edit-location-modal.component.html',
   styleUrls: ['./edit-location-modal.component.scss'],
-  imports: [CommonModule, IonicModule, ReactiveFormsModule],
+  imports: [CommonModule, IonicModule, ReactiveFormsModule, TranslateModule],
   standalone: true,
 })
 export class EditLocationModalComponent implements OnInit {
   @Input() location!: Location;
   locationForm: FormGroup;
-  locationStatuses = ['Planned', 'Visited', 'Skipped'];
+  locationStatuses = ['Planned', 'Visited'];
 
   constructor(
     private modalController: ModalController,
     private fb: FormBuilder,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private translateService: TranslateService
   ) {
     this.locationForm = this.fb.group({
       location: ['', Validators.required],
@@ -79,14 +81,21 @@ export class EditLocationModalComponent implements OnInit {
         locationData.id = this.location.id;
         this.modalController.dismiss(locationData);
         const toast = await this.toastController.create({
-          message: 'Location updated',
+          message: this.translateService.instant(
+            'EDIT_LOCATION.LOCATION_UPDATED',
+            {
+              locationName: locationData.location,
+            }
+          ),
           color: 'success',
           duration: 2000,
         });
         await toast.present();
       } else {
         const toast = await this.toastController.create({
-          message: 'Failed to update location',
+          message: this.translateService.instant(
+            'EDIT_LOCATION.FAILED_TO_UPDATE_LOCATION'
+          ),
           color: 'danger',
           duration: 2000,
         });

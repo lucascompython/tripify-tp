@@ -1,0 +1,102 @@
+{
+    "LOADING": "Loading...",
+    "PROFILE": {
+        "PROFILE": "Profile",
+        "SAVE": "Save",
+        "NAME": "Name",
+        "NEW_PASSWORD": "New Password",
+        "CURRENT_PASSWORD": "Current Password"
+    },
+    "TABS": {
+        "TRIPS": "Trips",
+        "ADD": "Add",
+        "LOCATIONS": "Locations",
+        "SIGN_OUT": "Sign Out"
+    },
+    "TRIPS": {
+        "SEARCH_TRIP": "Search Trip"
+    },
+    "TRIP_DETAILS": {
+        "TRIP_DETAILS": "Trip Details",
+        "CLOSE": "Close",
+        "DESCRIPTION": "Description",
+        "TYPE": "Type",
+        "STATUS": "Status",
+        "DESTINATION": "Destination",
+        "DEPARTURE": "Departure",
+        "START_DATE": "Start Date",
+        "END_DATE": "End Date",
+        "OWNER": "Owner",
+        "VIEW_LOCATIONS": "View Locations",
+        "COMMENTS": "Comments",
+        "WRITE_COMMENT": "Write a comment",
+        "WRITE_COMMENT_HERE": "Write a comment here",
+        "ADD_COMMENT": "Add Comment",
+        "SHARE_TRIP": "Share Trip"
+    },
+    "Business": "Business",
+    "Personal": "Personal",
+    "Planned": "Planned",
+    "Completed": "Completed",
+    "Cancelled": "Cancelled",
+    "SHARE_TRIP": {
+        "SHARE": "Share"
+    },
+    "EDIT_TRIP": {
+        "EDIT_TRIP": "Edit Trip",
+        "TRIP_UPDATED": "Trip {{tripName}} updated successfully!",
+        "FAILED_TO_UPDATE_TRIP": "Failed to update trip."
+    },
+    "DELETE_TRIP": {
+        "CONFIRM": "Confirm",
+        "ARE_YOU_SURE": "Are you sure you want to delete this trip?",
+        "CANCEL": "Cancel",
+        "DELETE": "Delete",
+        "TRIP_DELETED": "Trip {{tripName}} deleted successfully!"
+    },
+    "ADD_TRIP": {
+        "ADD_TRIP": "Add Trip",
+        "DESCRIPTION_PLACEHOLDER": "Enter description",
+        "TYPE_PLACEHOLDER": "Select type",
+        "STATUS_PLACEHOLDER": "Select status",
+        "DESTINATION_PLACEHOLDER": "Enter destination",
+        "DEPARTURE_PLACEHOLDER": "Enter departure",
+        "LOCATIONS_SELECTED": "locations selected",
+        "CREATE_TRIP": "Create Trip",
+        "TRIP_CREATED": "Trip {{tripName}} created successfully!",
+        "FAILED_TO_CREATE_TRIP": "Failed to create trip."
+    },
+    "SELECT_LOCATIONS": {
+        "SELECT_LOCATIONS": "Select Locations",
+        "ADD_LOCATION": "Add Location"
+    },
+    "ADD_LOCATION": {
+        "LOCATION": "Location",
+        "ENTER_LOCATION": "Enter location"
+    },
+    "Visited": "Visited",
+    "LOCATIONS": {
+        "SEARCH_LOCATION": "Search Location"
+    },
+    "EDIT_LOCATION": {
+        "EDIT_LOCATION": "Edit Location",
+        "LOCATION_UPDATED": "Location {{locationName}} updated successfully!",
+        "FAILED_TO_UPDATE_LOCATION": "Failed to update location."
+    },
+    "DELETE_LOCATION": {
+        "ARE_YOU_SURE": "Are you sure you want to delete this location?",
+        "LOCATION_DELETED": "Location deleted successfully!",
+        "FAILED_TO_DELETE_LOCATION": "Failed to delete location."
+    },
+    "REGISTER": {
+        "REGISTER": "Register",
+        "PASSWORD": "Password",
+        "WELCOME": "Welcome to Tripify!",
+        "ALREADY_HAVE_ACCOUNT": "Already have an account? Login"
+    },
+    "LOGIN": {
+        "LOGIN": "Login",
+        "WELCOME_BACK": "Welcome Back to Tripify!",
+        "DONT_HAVE_ACCOUNT": "Don't have an account? Register"
+    }
+}

@@ -16,6 +16,7 @@ import {
 } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { AddLocationModalComponent } from '../add-location-modal/add-location-modal.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-select-location-modal',
@@ -34,6 +35,7 @@ import { AddLocationModalComponent } from '../add-location-modal/add-location-mo
     IonCheckbox,
     IonFooter,
     CommonModule,
+    TranslateModule,
   ],
 })
 export class SelectLocationModalComponent implements OnInit {

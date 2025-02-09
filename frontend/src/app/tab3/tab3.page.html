@@ -1,10 +1,10 @@
 <ion-header>
   <ion-toolbar>
     <div class="toolbar-content">
-      <ion-title>Locations</ion-title>
+      <ion-title>{{ "TABS.LOCATIONS" | translate }}</ion-title>
       <ion-searchbar
         (ionInput)="filterLocations($event)"
-        placeholder="Search Locations"
+        placeholder="{{ 'LOCATIONS.SEARCH_LOCATION' | translate }}"
       ></ion-searchbar>
     </div>
   </ion-toolbar>

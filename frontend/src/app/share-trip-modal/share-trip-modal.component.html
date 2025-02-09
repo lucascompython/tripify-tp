@@ -1,8 +1,10 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Share Trip</ion-title>
+    <ion-title>{{ "TRIP_DETAILS.SHARE_TRIP" | translate }}</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="closeModal()">Close</ion-button>
+      <ion-button (click)="closeModal()">{{
+        "TRIP_DETAILS.CLOSE" | translate
+      }}</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -22,7 +24,9 @@
 <ion-footer>
   <ion-toolbar>
     <ion-buttons slot="end">
-      <ion-button (click)="shareTrip()">Share</ion-button>
+      <ion-button (click)="shareTrip()">{{
+        "SHARE_TRIP.SHARE" | translate
+      }}</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>

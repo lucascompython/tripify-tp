@@ -10,6 +10,9 @@ import {
   IonHeader,
   IonTitle,
   ToastController,
+  IonButtons,
+  IonSelect,
+  IonSelectOption,
 } from '@ionic/angular/standalone';
 import {
   FormBuilder,
@@ -17,7 +20,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { ToolbarWithLanguageSelect } from '../toolbar-with-language-select/toolbar-with-language-select.component';
 
 @Component({
   selector: 'app-register',
@@ -25,14 +29,14 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['profile.page.scss'],
   imports: [
     IonHeader,
-    IonToolbar,
     IonContent,
     IonItem,
     IonLabel,
     IonInput,
     IonButton,
-    IonTitle,
+    ToolbarWithLanguageSelect,
     ReactiveFormsModule,
+    TranslateModule,
   ],
   schemas: [],
   standalone: true,
@@ -44,7 +48,8 @@ export class ProfilePage implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private toastController: ToastController
+    private toastController: ToastController,
+    public translateService: TranslateService
   ) {
     this.profileForm = this.fb.group({
       name: ['', Validators.required],
@@ -57,6 +62,8 @@ export class ProfilePage implements OnInit {
   ngOnInit() {
     this.fetchUser();
   }
+
+  switchLanguage(event: Event) {}
 
   async fetchUser() {
     const resp = await authFetch(`${API_URL}/users/${this.userId}`);

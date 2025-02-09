@@ -20,8 +20,13 @@ import {
   IonCardTitle,
   IonCardHeader,
   AlertController,
+  IonButtons,
+  IonSelect,
+  IonSelectOption,
 } from '@ionic/angular/standalone';
 import { API_URL } from '../utils/api_utils';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { ToolbarWithLanguageSelect } from '../toolbar-with-language-select/toolbar-with-language-select.component';
 
 @Component({
   selector: 'app-register',
@@ -33,14 +38,15 @@ import { API_URL } from '../utils/api_utils';
     IonCardContent,
     IonCard,
     IonHeader,
-    IonToolbar,
-    IonTitle,
     IonContent,
     IonButton,
     IonInput,
     IonItem,
     IonLabel,
+    IonButton,
+    ToolbarWithLanguageSelect,
     ReactiveFormsModule,
+    TranslateModule,
   ],
   standalone: true,
 })
@@ -50,7 +56,8 @@ export class RegisterPage {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private alertController: AlertController
+    private alertController: AlertController,
+    public translateService: TranslateService
   ) {
     this.registerForm = this.fb.group({
       name: ['', Validators.required],

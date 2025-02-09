@@ -1,6 +1,13 @@
 import { LoadingController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 
 const loadingController = new LoadingController();
+
+let translateService: TranslateService;
+
+export const setTranslateService = (ts: TranslateService) => {
+  translateService = ts;
+};
 
 export const API_URL = 'http://localhost:1234';
 
@@ -9,7 +16,7 @@ export async function authFetch(
   options?: RequestInit
 ): Promise<Response> {
   const loading = await loadingController.create({
-    message: 'Loading...',
+    message: translateService.instant('LOADING'),
   });
   await loading.present();
   const token = localStorage.getItem('token')!;

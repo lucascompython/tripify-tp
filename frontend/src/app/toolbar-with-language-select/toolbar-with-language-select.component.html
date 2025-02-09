@@ -1,0 +1,14 @@
+<ion-toolbar>
+  <ion-title>{{ title }}</ion-title>
+  <ion-buttons slot="end">
+    <ion-select
+      (ionChange)="translateService.use($event.detail.value)"
+      interface="popover"
+      placeholder="Language"
+      [value]="translateService.currentLang"
+    >
+      <ion-select-option value="en">English</ion-select-option>
+      <ion-select-option value="pt">Português</ion-select-option>
+    </ion-select>
+  </ion-buttons>
+</ion-toolbar>

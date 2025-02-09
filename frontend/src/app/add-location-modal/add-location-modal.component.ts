@@ -21,6 +21,7 @@ import {
   IonToolbar,
 } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-add-location-modal',
@@ -40,6 +41,7 @@ import { CommonModule } from '@angular/common';
     CommonModule,
     IonInput,
     IonSelect,
+    TranslateModule,
   ],
 })
 export class AddLocationModalComponent implements OnInit {

@@ -1,0 +1,102 @@
+{
+    "LOADING": "A carregar...",
+    "PROFILE": {
+        "PROFILE": "Perfil",
+        "SAVE": "Guardar",
+        "NAME": "Nome",
+        "NEW_PASSWORD": "Nova Palavra-passe",
+        "CURRENT_PASSWORD": "Palavra-passe Atual"
+    },
+    "TABS": {
+        "TRIPS": "Viagens",
+        "ADD": "Adicionar",
+        "LOCATIONS": "Locais",
+        "SIGN_OUT": "Sair"
+    },
+    "TRIPS": {
+        "SEARCH_TRIP": "Procurar Viagem"
+    },
+    "TRIP_DETAILS": {
+        "TRIP_DETAILS": "Detalhes da Viagem",
+        "CLOSE": "Fechar",
+        "DESCRIPTION": "Descrição",
+        "TYPE": "Tipo",
+        "STATUS": "Estado",
+        "DESTINATION": "Destino",
+        "DEPARTURE": "Partida",
+        "START_DATE": "Data de Início",
+        "END_DATE": "Data de Fim",
+        "OWNER": "Proprietário",
+        "VIEW_LOCATIONS": "Ver Locais",
+        "COMMENTS": "Comentários",
+        "WRITE_COMMENT": "Escreva um comentário",
+        "WRITE_COMMENT_HERE": "Escreva um comentário aqui",
+        "ADD_COMMENT": "Adicionar Comentário",
+        "SHARE_TRIP": "Partilhar Viagem"
+    },
+    "Business": "Negócios",
+    "Personal": "Pessoal",
+    "Planned": "Planeado",
+    "Completed": "Concluído",
+    "Cancelled": "Cancelado",
+    "SHARE_TRIP": {
+        "SHARE": "Partilhar"
+    },
+    "EDIT_TRIP": {
+        "EDIT_TRIP": "Editar Viagem",
+        "TRIP_UPDATED": "Viagem {{tripName}} atualizada com sucesso!",
+        "FAILED_TO_UPDATE_TRIP": "Falha ao atualizar viagem."
+    },
+    "DELETE_TRIP": {
+        "CONFIRM": "Confirmar",
+        "ARE_YOU_SURE": "Tem a certeza que deseja eliminar esta viagem?",
+        "CANCEL": "Cancelar",
+        "DELETE": "Eliminar",
+        "TRIP_DELETED": "Viagem {{tripName}} eliminada com sucesso!"
+    },
+    "ADD_TRIP": {
+        "ADD_TRIP": "Adicionar Viagem",
+        "DESCRIPTION_PLACEHOLDER": "Introduza descrição",
+        "TYPE_PLACEHOLDER": "Selecione tipo",
+        "STATUS_PLACEHOLDER": "Selecione estado",
+        "DESTINATION_PLACEHOLDER": "Introduza destino",
+        "DEPARTURE_PLACEHOLDER": "Introduza partida",
+        "LOCATIONS_SELECTED": "locais selecionados",
+        "CREATE_TRIP": "Criar Viagem",
+        "TRIP_CREATED": "Viagem {{tripName}} criada com sucesso!",
+        "FAILED_TO_CREATE_TRIP": "Falha ao criar viagem."
+    },
+    "SELECT_LOCATIONS": {
+        "SELECT_LOCATIONS": "Selecionar Locais",
+        "ADD_LOCATION": "Adicionar Local"
+    },
+    "ADD_LOCATION": {
+        "LOCATION": "Local",
+        "ENTER_LOCATION": "Introduza local"
+    },
+    "Visited": "Visitado",
+    "LOCATIONS": {
+        "SEARCH_LOCATION": "Procurar Local"
+    },
+    "EDIT_LOCATION": {
+        "EDIT_LOCATION": "Editar Local",
+        "LOCATION_UPDATED": "Local {{locationName}} atualizado com sucesso!",
+        "FAILED_TO_UPDATE_LOCATION": "Falha ao atualizar local."
+    },
+    "DELETE_LOCATION": {
+        "ARE_YOU_SURE": "Tem a certeza que deseja eliminar este local?",
+        "LOCATION_DELETED": "Local eliminado com sucesso!",
+        "FAILED_TO_DELETE_LOCATION": "Falha ao eliminar local."
+    },
+    "REGISTER": {
+        "REGISTER": "Registar",
+        "PASSWORD": "Palavra-passe",
+        "WELCOME": "Bem-vindo ao Tripify!",
+        "ALREADY_HAVE_ACCOUNT": "Já tem uma conta? Iniciar Sessão"
+    },
+    "LOGIN": {
+        "LOGIN": "Iniciar Sessão",
+        "WELCOME_BACK": "Bem-vindo de volta ao Tripify!",
+        "DONT_HAVE_ACCOUNT": "Não tem uma conta? Registar"
+    }
+}

@@ -16,6 +16,7 @@ import {
   IonItem,
   PopoverController,
 } from '@ionic/angular/standalone';
+import { TranslateModule } from '@ngx-translate/core';
 import { addIcons } from 'ionicons';
 import {
   mapOutline,
@@ -42,6 +43,7 @@ import {
     IonContent,
     IonList,
     IonItem,
+    TranslateModule,
   ],
 })
 export class TabsPage {

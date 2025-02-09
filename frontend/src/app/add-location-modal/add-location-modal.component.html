@@ -1,8 +1,10 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Add Location</ion-title>
+    <ion-title>{{ "SELECT_LOCATIONS.ADD_LOCATION" | translate }}</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="closeModal()">Close</ion-button>
+      <ion-button (click)="closeModal()">{{
+        "TRIP_DETAILS.CLOSE" | translate
+      }}</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -10,43 +12,61 @@
 <ion-content>
   <form [formGroup]="locationForm" (ngSubmit)="addLocation()">
     <ion-item>
-      <ion-label position="stacked">Location</ion-label>
+      <ion-label position="stacked">{{
+        "ADD_LOCATION.LOCATION" | translate
+      }}</ion-label>
       <ion-input
         formControlName="location"
-        placeholder="Enter location"
+        placeholder="{{ 'ADD_LOCATION.ENTER_LOCATION' | translate }}"
       ></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="stacked">Description</ion-label>
+      <ion-label position="stacked">{{
+        "TRIP_DETAILS.DESCRIPTION" | translate
+      }}</ion-label>
       <ion-input
         formControlName="description"
-        placeholder="Enter description"
+        placeholder="{{ 'ADD_TRIP.DESCRIPTION_PLACEHOLDER' | translate }}"
       ></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="stacked">Type</ion-label>
-      <ion-input formControlName="type" placeholder="Enter type"></ion-input>
+      <ion-label position="stacked">{{
+        "TRIP_DETAILS.TYPE" | translate
+      }}</ion-label>
+      <ion-input
+        formControlName="type"
+        placeholder="{{ 'ADD_TRIP.TYPE_PLACEHOLDER' | translate }}"
+      ></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="stacked">Status</ion-label>
-      <ion-select formControlName="status" placeholder="Select status">
+      <ion-label position="stacked">{{
+        "TRIP_DETAILS.STATUS" | translate
+      }}</ion-label>
+      <ion-select
+        formControlName="status"
+        placeholder="{{ 'ADD_TRIP.STATUS_PLACEHOLDER' | translate }}"
+      >
         <ion-select-option
           *ngFor="let status of locationStatuses"
           [value]="status"
-          >{{ status }}</ion-select-option
+          >{{ status | translate }}</ion-select-option
         >
       </ion-select>
     </ion-item>
     <ion-item>
-      <ion-label position="stacked">Start Date</ion-label>
+      <ion-label position="stacked">{{
+        "TRIP_DETAILS.START_DATE" | translate
+      }}</ion-label>
       <ion-input formControlName="start_date" type="date"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="stacked">End Date</ion-label>
+      <ion-label position="stacked">{{
+        "TRIP_DETAILS.END_DATE" | translate
+      }}</ion-label>
       <ion-input formControlName="end_date" type="date"></ion-input>
     </ion-item>
-    <ion-button expand="full" type="submit" [disabled]="locationForm.invalid"
-      >Add Location</ion-button
-    >
+    <ion-button expand="full" type="submit" [disabled]="locationForm.invalid">{{
+      "SELECT_LOCATIONS.ADD_LOCATION" | translate
+    }}</ion-button>
   </form>
 </ion-content>

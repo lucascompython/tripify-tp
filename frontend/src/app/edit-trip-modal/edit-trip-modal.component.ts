@@ -22,6 +22,7 @@ import {
   ToastController,
 } from '@ionic/angular/standalone';
 import { authFetch, API_URL, TripType, TripStatus } from '../utils/api_utils';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-edit-trip-modal',
@@ -41,6 +42,7 @@ import { authFetch, API_URL, TripType, TripStatus } from '../utils/api_utils';
     ReactiveFormsModule,
     IonSelect,
     IonSelectOption,
+    TranslateModule,
   ],
   standalone: true,
 })
@@ -53,7 +55,8 @@ export class EditTripModalComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private modalController: ModalController,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private translateService: TranslateService
   ) {
     this.editTripForm = this.fb.group({
       description: ['', Validators.required],
@@ -96,14 +99,18 @@ export class EditTripModalComponent implements OnInit {
           updatedTrip.id = this.trip.id;
           this.modalController.dismiss(updatedTrip);
           const toast = await this.toastController.create({
-            message: 'Trip updated',
+            message: this.translateService.instant('EDIT_TRIP.TRIP_UPDATED', {
+              tripName: updatedTrip.description,
+            }),
             color: 'success',
             duration: 2000,
           });
           await toast.present();
         } else {
           const toast = await this.toastController.create({
-            message: 'Failed to update trip',
+            message: this.translateService.instant(
+              'EDIT_TRIP.FAILED_TO_UPDATE_TRIP'
+            ),
             color: 'danger',
             duration: 2000,
           });

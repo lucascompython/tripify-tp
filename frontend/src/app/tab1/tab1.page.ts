@@ -20,6 +20,7 @@ import { authFetch, API_URL, getTrips, Trip } from '../utils/api_utils';
 import { EditTripModalComponent } from '../edit-trip-modal/edit-trip-modal.component';
 import { TripDetailsModalComponent } from '../trip-details-modal/trip-details-modal.component';
 import { addIcons } from 'ionicons';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -36,6 +37,7 @@ import { addIcons } from 'ionicons';
     IonToolbar,
     IonTitle,
     IonSearchbar,
+    TranslateModule,
   ],
 })
 export class Tab1Page {
@@ -44,7 +46,8 @@ export class Tab1Page {
   constructor(
     private alertController: AlertController,
     private modalController: ModalController,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private translateService: TranslateService
   ) {
     addIcons({
       'create-outline': createOutline,
@@ -105,16 +108,16 @@ export class Tab1Page {
     event.stopPropagation();
 
     const alert = await this.alertController.create({
-      header: 'Confirm!',
-      message: 'Are you sure you want to delete this trip?',
+      header: this.translateService.instant('DELETE_TRIP.CONFIRM'),
+      message: this.translateService.instant('DELETE_TRIP.ARE_YOU_SURE'),
       buttons: [
         {
-          text: 'Cancel',
+          text: this.translateService.instant('DELETE_TRIP.CANCEL'),
           role: 'cancel',
           cssClass: 'secondary',
         },
         {
-          text: 'Delete',
+          text: this.translateService.instant('DELETE_TRIP.DELETE'),
           handler: async () => {
             if (trip.shared) {
               await authFetch(`${API_URL}/trips/delete_shared`, {
@@ -131,7 +134,10 @@ export class Tab1Page {
             }
             const tripId = trip.id;
             const toast = await this.toastController.create({
-              message: `Trip ${trip.description} deleted`,
+              message: this.translateService.instant(
+                'DELETE_TRIP.TRIP_DELETED',
+                { tripName: trip.description }
+              ),
               color: 'success',
               duration: 2000,
             });

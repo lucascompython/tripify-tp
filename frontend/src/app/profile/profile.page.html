@@ -1,13 +1,15 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Profile</ion-title>
-  </ion-toolbar>
+  <toolbar-with-language-select
+    [title]="'PROFILE.PROFILE' | translate"
+  ></toolbar-with-language-select>
 </ion-header>
 
 <ion-content>
   <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
     <ion-item>
-      <ion-label position="floating">Name</ion-label>
+      <ion-label position="floating"
+        >{{ "PROFILE.PROFILE" | translate }}</ion-label
+      >
       <ion-input type="text" formControlName="name" required></ion-input>
     </ion-item>
     <ion-item>
@@ -15,11 +17,15 @@
       <ion-input type="email" formControlName="email" required></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">New Password</ion-label>
+      <ion-label position="floating"
+        >{{ "PROFILE.NEW_PASSWORD" | translate }}</ion-label
+      >
       <ion-input type="password" formControlName="newPassword"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Current Password</ion-label>
+      <ion-label position="floating"
+        >{{ "PROFILE.CURRENT_PASSWORD" | translate }}</ion-label
+      >
       <ion-input
         type="password"
         formControlName="currentPassword"
@@ -30,7 +36,7 @@
       expand="full"
       type="submit"
       [disabled]="profileForm.get('currentPassword')?.invalid"
-      >Save</ion-button
+      >{{ "PROFILE.SAVE" | translate }}</ion-button
     >
   </form>
 </ion-content>

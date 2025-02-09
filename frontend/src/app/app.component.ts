@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
-import { authFetch, API_URL } from './utils/api_utils';
+import { authFetch, API_URL, setTranslateService } from './utils/api_utils';
 import { register } from 'swiper/element/bundle';
+import { TranslateService } from '@ngx-translate/core';
 
 register();
 
@@ -10,10 +11,18 @@ register();
   selector: 'app-root',
   templateUrl: 'app.component.html',
   imports: [IonApp, IonRouterOutlet],
+  standalone: true,
 })
 export class AppComponent implements OnInit {
   hasShownIntro = false;
-  constructor(private router: Router) {}
+  constructor(private router: Router, private translate: TranslateService) {
+    translate.addLangs(['en', 'pt']);
+    translate.setDefaultLang('en');
+    const browserLang = translate.getBrowserLang() || 'en';
+    translate.use(browserLang.match(/en|pt/) ? browserLang : 'en');
+
+    setTranslateService(translate);
+  }
   ngOnInit() {
     this.checkUser();
   }

@@ -1,8 +1,10 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Select Locations</ion-title>
+    <ion-title>{{ "SELECT_LOCATIONS.SELECT_LOCATIONS" | translate }}</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="closeModal()">Close</ion-button>
+      <ion-button (click)="closeModal()">{{
+        "TRIP_DETAILS.CLOSE" | translate
+      }}</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -23,10 +25,14 @@
 <ion-footer>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button (click)="openAddLocationModal()">Add Location</ion-button>
+      <ion-button (click)="openAddLocationModal()">{{
+        "SELECT_LOCATIONS.ADD_LOCATION" | translate
+      }}</ion-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-button (click)="confirmSelection()">Confirm</ion-button>
+      <ion-button (click)="confirmSelection()">{{
+        "DELETE_TRIP.CONFIRM" | translate
+      }}</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>

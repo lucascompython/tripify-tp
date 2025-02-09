@@ -20,8 +20,13 @@ import {
   IonCardTitle,
   IonCardContent,
   AlertController,
+  IonButtons,
+  IonSelect,
+  IonSelectOption,
 } from '@ionic/angular/standalone';
 import { API_URL } from '../utils/api_utils';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { ToolbarWithLanguageSelect } from '../toolbar-with-language-select/toolbar-with-language-select.component';
 
 @Component({
   selector: 'app-login',
@@ -29,8 +34,6 @@ import { API_URL } from '../utils/api_utils';
   styleUrls: ['login.page.scss'],
   imports: [
     IonHeader,
-    IonToolbar,
-    IonTitle,
     IonContent,
     IonButton,
     IonInput,
@@ -40,7 +43,9 @@ import { API_URL } from '../utils/api_utils';
     IonCardHeader,
     IonCardTitle,
     IonCardContent,
+    ToolbarWithLanguageSelect,
     ReactiveFormsModule,
+    TranslateModule,
   ],
   standalone: true,
 })
@@ -50,7 +55,8 @@ export class LoginPage {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private alertController: AlertController
+    private alertController: AlertController,
+    public translateService: TranslateService
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],

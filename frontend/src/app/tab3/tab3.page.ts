@@ -11,6 +11,8 @@ import {
   ModalController,
   IonIcon,
   IonSearchbar,
+  AlertController,
+  ToastController,
 } from '@ionic/angular/standalone';
 import {
   API_URL,
@@ -22,6 +24,7 @@ import { LocationDetailsModalComponent } from '../location-details-modal/locatio
 import { CommonModule } from '@angular/common';
 import { addIcons } from 'ionicons';
 import { createOutline, trashOutline } from 'ionicons/icons';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 interface Location extends BaseLocation {
   id: number;
@@ -45,13 +48,19 @@ interface Location extends BaseLocation {
     CommonModule,
     IonIcon,
     IonSearchbar,
+    TranslateModule,
   ],
 })
 export class Tab3Page {
   locations: Location[] = [];
   filteredLocations: Location[] = [];
 
-  constructor(private modalController: ModalController) {
+  constructor(
+    private modalController: ModalController,
+    private alertController: AlertController,
+    private toastController: ToastController,
+    private translateService: TranslateService
+  ) {
     addIcons({
       'create-outline': createOutline,
       'trash-outline': trashOutline,
@@ -113,14 +122,53 @@ export class Tab3Page {
   }
 
   async deleteLocation(locationId: number) {
-    const response = await authFetch(`${API_URL}/locations/${locationId}`, {
-      method: 'DELETE',
+    const alert = await this.alertController.create({
+      header: this.translateService.instant('DELETE_TRIP.CONFIRM'),
+      message: this.translateService.instant('DELETE_LOCATION.ARE_YOU_SURE'),
+      buttons: [
+        {
+          text: this.translateService.instant('DELETE_TRIP.CANCEL'),
+          role: 'cancel',
+          cssClass: 'secondary',
+        },
+        {
+          text: this.translateService.instant('DELETE_TRIP.DELETE'),
+          handler: async () => {
+            const response = await authFetch(
+              `${API_URL}/locations/${locationId}`,
+              {
+                method: 'DELETE',
+              }
+            );
+
+            if (response.ok) {
+              this.locations = this.locations.filter(
+                (loc) => loc.id !== locationId
+              );
+              this.filteredLocations = this.locations;
+              const toast = await this.toastController.create({
+                message: this.translateService.instant(
+                  'DELETE_LOCATION.LOCATION_DELETED'
+                ),
+                color: 'success',
+                duration: 2000,
+              });
+              await toast.present();
+            } else {
+              const toast = await this.toastController.create({
+                message: this.translateService.instant(
+                  'DELETE_LOCATION.FAILED_TO_DELETE'
+                ),
+                color: 'danger',
+                duration: 2000,
+              });
+              await toast.present();
+            }
+          },
+        },
+      ],
     });
 
-    if (response.ok) {
-      this.locations = this.locations.filter((loc) => loc.id !== locationId);
-    } else {
-      console.error('Failed to delete location');
-    }
+    await alert.present();
   }
 }

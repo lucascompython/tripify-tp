@@ -16,6 +16,7 @@ import {
 } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { authFetch, API_URL, User } from '../utils/api_utils';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-share-trip-modal',
@@ -34,6 +35,7 @@ import { authFetch, API_URL, User } from '../utils/api_utils';
     IonList,
     IonButtons,
     CommonModule,
+    TranslateModule,
   ],
   standalone: true,
 })

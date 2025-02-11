@@ -16,10 +16,10 @@ export async function authFetch(
   options?: RequestInit
 ): Promise<Response> {
   console.log('authFetch before loading');
-  const loading = await loadingController.create({
-    message: translateService.instant('LOADING'),
-  });
-  await loading.present();
+  // const loading = await loadingController.create({
+  //   message: translateService.instant('LOADING'),
+  // });
+  // await loading.present();
   console.log('authFetch after loading');
   const token = localStorage.getItem('token')!;
   console.log('authFetch after token');
@@ -33,7 +33,7 @@ export async function authFetch(
       },
     });
   } finally {
-    await loading.dismiss();
+    // await loading.dismiss();
   }
 }
 

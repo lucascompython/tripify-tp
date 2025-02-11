@@ -1,0 +1,6 @@
+Github: https://github.com/lucascompython/tripify-tp
+Vercel: https://tripify-tp.vercel.app/
+Plataforma de Projetos: https://github.com/users/lucascompython/projects/2
+
+Mockups na pasta resources/mockups
+Grelha de avaliação em resources/

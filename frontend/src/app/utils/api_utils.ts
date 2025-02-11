@@ -1,7 +1,11 @@
 import { LoadingController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
-const loadingController = new LoadingController();
+let loadingController: LoadingController;
+
+export const setLoadingController = (lc: LoadingController) => {
+  loadingController = lc;
+};
 
 let translateService: TranslateService;
 
@@ -15,15 +19,11 @@ export async function authFetch(
   url: Request | string,
   options?: RequestInit
 ): Promise<Response> {
-  console.log('authFetch before loading');
-  // const loading = await loadingController.create({
-  //   message: translateService.instant('LOADING'),
-  // });
-  // await loading.present();
-  console.log('authFetch after loading');
+  const loading = await loadingController.create({
+    message: translateService.instant('LOADING'),
+  });
+  await loading.present();
   const token = localStorage.getItem('token')!;
-  console.log('authFetch after token');
-  console.log('token', token);
   try {
     return await fetch(url, {
       ...options,
@@ -33,7 +33,7 @@ export async function authFetch(
       },
     });
   } finally {
-    // await loading.dismiss();
+    await loading.dismiss();
   }
 }
 

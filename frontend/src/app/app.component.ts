@@ -1,7 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
-import { authFetch, API_URL, setTranslateService } from './utils/api_utils';
+import {
+  IonApp,
+  IonRouterOutlet,
+  LoadingController,
+} from '@ionic/angular/standalone';
+import {
+  authFetch,
+  API_URL,
+  setTranslateService,
+  setLoadingController,
+} from './utils/api_utils';
 import { register } from 'swiper/element/bundle';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -15,13 +24,18 @@ register();
 })
 export class AppComponent implements OnInit {
   hasShownIntro = false;
-  constructor(private router: Router, private translate: TranslateService) {
+  constructor(
+    private router: Router,
+    private translate: TranslateService,
+    private loadingController: LoadingController
+  ) {
     translate.addLangs(['en', 'pt']);
     translate.setDefaultLang('en');
     const browserLang = translate.getBrowserLang() || 'en';
     translate.use(browserLang.match(/en|pt/) ? browserLang : 'en');
 
     setTranslateService(translate);
+    setLoadingController(loadingController);
   }
   ngOnInit() {
     this.checkUser();
@@ -29,9 +43,7 @@ export class AppComponent implements OnInit {
 
   async checkUser() {
     try {
-      console.log('before');
       const resp = await authFetch(`${API_URL}/users/check`);
-      console.log('after');
 
       if (!resp.ok) {
         if (
@@ -39,10 +51,8 @@ export class AppComponent implements OnInit {
           window.location.pathname !== '/register'
         ) {
           if (!this.hasShownIntro) {
-            console.log('before redirect');
             this.hasShownIntro = true;
             this.router.navigate(['/intro-sliders']);
-            console.log('after redirect');
           } else {
             this.router.navigate(['/login']);
           }
@@ -56,7 +66,6 @@ export class AppComponent implements OnInit {
         this.router.navigate(['/']);
       }
     } catch (e) {
-      console.log('after in catch');
       if (
         window.location.pathname !== '/register' &&
         window.location.pathname !== '/login'

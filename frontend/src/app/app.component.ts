@@ -24,6 +24,7 @@ export class AppComponent implements OnInit {
     setTranslateService(translate);
   }
   ngOnInit() {
+    console.log('test');
     this.checkUser();
   }
 

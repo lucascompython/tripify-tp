@@ -15,11 +15,15 @@ export async function authFetch(
   url: Request | string,
   options?: RequestInit
 ): Promise<Response> {
+  console.log('authFetch before loading');
   const loading = await loadingController.create({
     message: translateService.instant('LOADING'),
   });
   await loading.present();
+  console.log('authFetch after loading');
   const token = localStorage.getItem('token')!;
+  console.log('authFetch after token');
+  console.log('token', token);
   try {
     return await fetch(url, {
       ...options,

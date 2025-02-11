@@ -24,7 +24,6 @@ export class AppComponent implements OnInit {
     setTranslateService(translate);
   }
   ngOnInit() {
-    console.log('test');
     this.checkUser();
   }
 
@@ -57,6 +56,7 @@ export class AppComponent implements OnInit {
         this.router.navigate(['/']);
       }
     } catch (e) {
+      console.log('after in catch');
       if (
         window.location.pathname !== '/register' &&
         window.location.pathname !== '/login'

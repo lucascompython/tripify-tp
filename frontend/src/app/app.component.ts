@@ -30,7 +30,9 @@ export class AppComponent implements OnInit {
 
   async checkUser() {
     try {
+      console.log('before');
       const resp = await authFetch(`${API_URL}/users/check`);
+      console.log('after');
 
       if (!resp.ok) {
         if (
@@ -38,8 +40,10 @@ export class AppComponent implements OnInit {
           window.location.pathname !== '/register'
         ) {
           if (!this.hasShownIntro) {
+            console.log('before redirect');
             this.hasShownIntro = true;
             this.router.navigate(['/intro-sliders']);
+            console.log('after redirect');
           } else {
             this.router.navigate(['/login']);
           }

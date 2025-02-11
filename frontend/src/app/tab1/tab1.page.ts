@@ -14,6 +14,8 @@ import {
   IonTitle,
   ToastController,
   IonSearchbar,
+  IonSelect,
+  IonSelectOption,
 } from '@ionic/angular/standalone';
 import { createOutline, settingsOutline, trashOutline } from 'ionicons/icons';
 import { authFetch, API_URL, getTrips, Trip } from '../utils/api_utils';
@@ -37,12 +39,17 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
     IonToolbar,
     IonTitle,
     IonSearchbar,
+    IonSelect,
+    IonSelectOption,
     TranslateModule,
   ],
 })
 export class Tab1Page {
   trips: Trip[] = [];
   filteredTrips: Trip[] = [];
+  filterOrOrder = 'filter';
+  selectedStatus = '';
+  orderBy = 'newest';
   constructor(
     private alertController: AlertController,
     private modalController: ModalController,
@@ -71,6 +78,41 @@ export class Tab1Page {
       this.filteredTrips = this.trips.filter((trip) =>
         trip.description.toLowerCase().includes(query)
       );
+    }
+  }
+
+  filterByStatus(event: any) {
+    this.selectedStatus = event.detail.value;
+    if (this.selectedStatus === '') {
+      this.filteredTrips = this.trips;
+    } else {
+      this.filteredTrips = this.trips.filter(
+        (trip) => trip.status.toLowerCase() === this.selectedStatus
+      );
+    }
+  }
+
+  orderTrips(event: any) {
+    this.orderBy = event.detail.value;
+    if (this.orderBy === 'newest') {
+      this.filteredTrips.sort(
+        (a, b) =>
+          new Date(b.start_date).getTime() - new Date(a.start_date).getTime()
+      );
+    } else {
+      this.filteredTrips.sort(
+        (a, b) =>
+          new Date(a.start_date).getTime() - new Date(b.start_date).getTime()
+      );
+    }
+  }
+
+  onFilterOrOrderChange(event: any) {
+    this.filterOrOrder = event.detail.value;
+    if (this.filterOrOrder === 'filter') {
+      this.filterByStatus({ detail: { value: this.selectedStatus } });
+    } else {
+      this.orderTrips({ detail: { value: this.orderBy } });
     }
   }
 

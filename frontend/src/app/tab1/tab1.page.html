@@ -8,6 +8,52 @@
       ></ion-searchbar>
     </div>
   </ion-toolbar>
+  <ion-toolbar class="filter">
+    <ion-select
+      (ionChange)="onFilterOrOrderChange($event)"
+      [value]="filterOrOrder"
+      slot="start"
+    >
+      <ion-select-option value="filter"
+        >{{ "FILTER.FILTER" | translate }}</ion-select-option
+      >
+      <ion-select-option value="order"
+        >{{ "FILTER.ORDER" | translate }}</ion-select-option
+      >
+    </ion-select>
+    <ion-select
+      slot="end"
+      *ngIf="filterOrOrder === 'filter'"
+      (ionChange)="filterByStatus($event)"
+      [value]="selectedStatus"
+    >
+      <ion-select-option value=""
+        >{{ "FILTER.ALL" | translate }}</ion-select-option
+      >
+      <ion-select-option value="planned"
+        >{{ "Planned" | translate }}</ion-select-option
+      >
+      <ion-select-option value="completed"
+        >{{ "Completed" | translate }}</ion-select-option
+      >
+      <ion-select-option value="cancelled"
+        >{{ "Cancelled" | translate }}</ion-select-option
+      >
+    </ion-select>
+    <ion-select
+      slot="end"
+      *ngIf="filterOrOrder === 'order'"
+      (ionChange)="orderTrips($event)"
+      [value]="orderBy"
+    >
+      <ion-select-option value="newest"
+        >{{ "Newest first" | translate }}</ion-select-option
+      >
+      <ion-select-option value="oldest"
+        >{{ "Oldest first" | translate }}</ion-select-option
+      >
+    </ion-select>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>

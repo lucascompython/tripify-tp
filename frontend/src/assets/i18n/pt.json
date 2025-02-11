@@ -98,5 +98,10 @@
         "LOGIN": "Iniciar Sessão",
         "WELCOME_BACK": "Bem-vindo de volta ao Tripify!",
         "DONT_HAVE_ACCOUNT": "Não tem uma conta? Registar"
+    },
+    "FILTER": {
+        "FILTER": "Filtrar",
+        "Order": "Ordem",
+        "ALL": "Tudo"
     }
 }

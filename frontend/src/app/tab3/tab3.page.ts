@@ -13,6 +13,8 @@ import {
   IonSearchbar,
   AlertController,
   ToastController,
+  IonSelect,
+  IonSelectOption,
 } from '@ionic/angular/standalone';
 import {
   API_URL,
@@ -48,12 +50,17 @@ interface Location extends BaseLocation {
     CommonModule,
     IonIcon,
     IonSearchbar,
+    IonSelect,
+    IonSelectOption,
     TranslateModule,
   ],
 })
 export class Tab3Page {
   locations: Location[] = [];
   filteredLocations: Location[] = [];
+  filterOrOrder = 'filter';
+  selectedStatus = '';
+  orderBy = 'newest';
 
   constructor(
     private modalController: ModalController,
@@ -80,6 +87,36 @@ export class Tab3Page {
         location.location.toLowerCase().includes(query)
       );
     }
+  }
+
+  filterByStatus(event: any) {
+    this.selectedStatus = event.detail.value;
+    if (this.selectedStatus === '') {
+      this.filteredLocations = this.locations;
+    } else {
+      this.filteredLocations = this.locations.filter(
+        (location) => location.status.toLowerCase() === this.selectedStatus
+      );
+    }
+  }
+
+  orderLocations(event: any) {
+    this.orderBy = event.detail.value;
+    if (this.orderBy === 'newest') {
+      this.filteredLocations = this.filteredLocations.sort(
+        (a, b) =>
+          new Date(b.start_date).getTime() - new Date(a.start_date).getTime()
+      );
+    } else if (this.orderBy === 'oldest') {
+      this.filteredLocations = this.filteredLocations.sort(
+        (a, b) =>
+          new Date(a.start_date).getTime() - new Date(b.start_date).getTime()
+      );
+    }
+  }
+
+  onFilterOrOrderChange(event: any) {
+    this.filterOrOrder = event.detail.value;
   }
 
   async fetchLocations() {
